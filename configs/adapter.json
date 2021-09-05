@@ -1,2 +1,6 @@
 {
-    "adapter_type": "norma
+    "adapter_type": "normal",
+    "adapter_reduction_factor": 32,
+    "adapter_non_linearity": "relu",
+    "normal_adapter_residual": true,
+    "trainable_param_names": ".*layer_no
