@@ -1,0 +1,4 @@
+{
+    "dataset": "anli-r1",
+    "batch_size": 8,
+  

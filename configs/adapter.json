@@ -3,4 +3,8 @@
     "adapter_reduction_factor": 32,
     "adapter_non_linearity": "relu",
     "normal_adapter_residual": true,
-    "trainable_param_names": ".*layer_no
+    "trainable_param_names": ".*layer_norm.*|.*adapter.*",
+    "model_modifier": "adapters",
+    "lr": 3e-3,
+    "num_steps": 500
+}
