@@ -1,2 +1,7 @@
 {
-   
+    "dataset": "anli-r2",
+    "batch_size": 8,
+    "eval_batch_size": 16,
+    "grad_accum_factor": 1,
+    "num_shot": 50,
+    "length_nor
