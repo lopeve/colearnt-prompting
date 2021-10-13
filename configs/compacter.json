@@ -3,4 +3,8 @@
     "adapter_reduction_factor": 32,
     "adapter_non_linearity": "relu",
     "compacter_hypercomplex_division": 4,
-    "co
+    "compacter_learn_phm": true,
+    "compacter_hypercomplex_nonlinearity": "glorot-uniform",
+    "compacter_shared_phm_rule": false,
+    "compacter_factorized_phm": true,
+    "compacter_s
