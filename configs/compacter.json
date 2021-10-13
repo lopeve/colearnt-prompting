@@ -7,4 +7,8 @@
     "compacter_hypercomplex_nonlinearity": "glorot-uniform",
     "compacter_shared_phm_rule": false,
     "compacter_factorized_phm": true,
-    "compacter_s
+    "compacter_shared_W_phm": false,
+    "compacter_factorized_phm_rule": false,
+    "compacter_phm_c_init": "normal",
+    "compacter_phm_rank": 1,
+    "
