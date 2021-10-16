@@ -1,0 +1,5 @@
+{
+    "adapter_type": "compacter",
+    "adapter_reduction_factor": 32,
+    "adapter_non_linearity": "relu",
+  

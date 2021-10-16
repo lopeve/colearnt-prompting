@@ -17,4 +17,6 @@
     "compacter_kronecker_prod": false,
     "trainable_param_names": ".*layer_norm.*|.*adapter.*",
     "model_modifier": "adapters",
-    "lr"
+    "lr": 3e-3,
+    "num_steps": 500
+}
