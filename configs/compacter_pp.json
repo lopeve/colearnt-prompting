@@ -2,4 +2,7 @@
     "adapter_type": "compacter",
     "adapter_reduction_factor": 32,
     "adapter_non_linearity": "relu",
-  
+    "compacter_hypercomplex_division": 4,
+    "compacter_learn_phm": true,
+    "compacter_hypercomplex_nonlinearity": "glorot-uniform",
+    "compacter_share
