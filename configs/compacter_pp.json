@@ -5,4 +5,8 @@
     "compacter_hypercomplex_division": 4,
     "compacter_learn_phm": true,
     "compacter_hypercomplex_nonlinearity": "glorot-uniform",
-    "compacter_share
+    "compacter_shared_phm_rule": false,
+    "compacter_factorized_phm": true,
+    "compacter_shared_W_phm": false,
+    "compacter_factorized_phm_rule": false,
+    "compacter_phm_c_ini
