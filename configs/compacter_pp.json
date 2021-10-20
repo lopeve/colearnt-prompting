@@ -13,4 +13,7 @@
     "compacter_phm_rank": 1,
     "compacter_phm_init_range": 0.0001,
     "compacter_kronecker_prod": false,
-    "compacter_add_compacter_in_self_atte
+    "compacter_add_compacter_in_self_attention": false,
+    "compacter_add_compacter_in_cross_attention": false,
+    "trainable_param_names": ".*layer_norm.*|.*adapter.*",
+    "model_modifier": "adapte
