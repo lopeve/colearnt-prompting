@@ -9,4 +9,8 @@
     "compacter_factorized_phm": true,
     "compacter_shared_W_phm": false,
     "compacter_factorized_phm_rule": false,
-    "compacter_phm_c_ini
+    "compacter_phm_c_init": "normal",
+    "compacter_phm_rank": 1,
+    "compacter_phm_init_range": 0.0001,
+    "compacter_kronecker_prod": false,
+    "compacter_add_compacter_in_self_atte
