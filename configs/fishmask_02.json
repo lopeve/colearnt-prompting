@@ -1,0 +1,6 @@
+{
+    "fishmask_mode": "create",
+    "fishmask_keep_ratio": 0.002,
+    "batch_size": 1,
+    "eval_before_training": false,
+    "
