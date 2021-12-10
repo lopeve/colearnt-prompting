@@ -1,2 +1,7 @@
 {
-    "dataset"
+    "dataset": "gpt-cb",
+    "gpt_num_prompts": 4,
+    "validation_is_test": false,
+    "bert_name": "microsoft/deberta-large-mnli",
+    "bert_epochs": 100,
+    
