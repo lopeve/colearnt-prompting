@@ -1,9 +1,10 @@
+
 {
-    "dataset": "gpt-cb",
+    "dataset": "gpt-rte",
     "gpt_num_prompts": 4,
     "validation_is_test": false,
     "bert_name": "microsoft/deberta-large-mnli",
-    "bert_epochs": 100,
+    "bert_epochs": 20,
     "lr": 0.1,
     "weight_decay": 5e-3,
     "batch_size": 64,
