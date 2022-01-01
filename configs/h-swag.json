@@ -1,0 +1,5 @@
+{
+    "dataset": "h-swag",
+    "batch_size": 4,
+    "eval_batch_size": 16,
+    "grad_accum
