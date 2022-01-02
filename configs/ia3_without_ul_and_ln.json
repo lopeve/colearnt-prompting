@@ -1,4 +1,7 @@
 {
     "lora_scaling_rank": 1,
     "lora_rank": 0,
-    "lo
+    "lora_init_scale": 0.0,
+    "lora_modules": ".*SelfAttention|.*EncDecAttention|.*DenseReluDense",
+    "lora_layers": "k|v|wi_1.*",
+    "trainable_param_n
