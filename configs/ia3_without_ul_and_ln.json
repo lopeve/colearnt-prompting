@@ -10,4 +10,5 @@
     "length_norm": 0,
     "mc_loss": 0,
     "unlikely_loss": 0,
-    "num_s
+    "num_steps": 1000
+}
