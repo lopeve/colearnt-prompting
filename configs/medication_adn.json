@@ -1,0 +1,4 @@
+{
+    "dataset": "casi_adn",
+    "batch_size": 8,
+    "local_path
