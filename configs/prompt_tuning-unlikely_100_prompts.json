@@ -4,4 +4,7 @@
     "lr": 3e-1,
     "batch_size": 4,
     "grad_accum_factor": 2,
-    "num_ste
+    "num_steps": 1000,
+    "trainable_param_names": ".*prompt_embedding.*",
+    "scale_parameter": false
+}
