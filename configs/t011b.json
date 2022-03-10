@@ -1,0 +1,5 @@
+{
+    "exp_name": "debug",
+    "origin_model": "bigscience/T0",
+    "compute_precision": "bf16",
+    "compute_str
