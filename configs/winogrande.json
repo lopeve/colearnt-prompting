@@ -1,0 +1,6 @@
+{
+    "dataset": "winogrande",
+    "batch_size": 8,
+    "eval_batch_size": 16,
+    "grad_accum_factor": 1,
+   
