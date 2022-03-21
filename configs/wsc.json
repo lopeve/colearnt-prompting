@@ -1,0 +1,4 @@
+{
+    "dataset": "wsc",
+    "batch_size": 8,
+    "eval_batch_s
