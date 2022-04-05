@@ -20,3 +20,67 @@
     },
     "hypothesis": {
       "dtype": "string",
+      "id": null,
+      "_type": "Value"
+    },
+    "idx": {
+      "dtype": "int32",
+      "id": null,
+      "_type": "Value"
+    },
+    "label": {
+      "num_classes": 3,
+      "names": [
+        "entailment",
+        "contradiction",
+        "neutral"
+      ],
+      "id": null,
+      "_type": "ClassLabel"
+    },
+    "feat": {
+      "feature": {
+        "dtype": "float64",
+        "id": null,
+        "_type": "Value"
+      },
+      "length": -1,
+      "id": null,
+      "_type": "Sequence"
+    }
+  },
+  "homepage": "https://github.com/mcdm/CommitmentBank",
+  "license": "",
+  "post_processed": null,
+  "post_processing_size": null,
+  "size_in_bytes": 277899,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 87058,
+      "num_examples": 250,
+      "dataset_name": "super_glue"
+    },
+    "validation": {
+      "name": "validation",
+      "num_bytes": 21859,
+      "num_examples": 56,
+      "dataset_name": "super_glue"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 93500,
+      "num_examples": 250,
+      "dataset_name": "super_glue"
+    }
+  },
+  "supervised_keys": null,
+  "task_templates": null,
+  "version": {
+    "version_str": "1.0.2",
+    "description": null,
+    "major": 1,
+    "minor": 0,
+    "patch": 2
+  }
+}
