@@ -1,3 +1,3 @@
 {
   "builder_name": "super_glue",
-  "citation": "@article{de marneff_simons_tonhauser_2019,\n  title={The CommitmentBank: Investigating projection in naturally occurring discourse},\n  journal={proceedings of Sinn und Bedeutung 23},\n  author={De Marneff, Marie-Catherine and Simons, Mandy and Tonhauser, Judith},\n  year={2019}\n}\n@article{wang2019superglue,\n  title={SuperGLUE: A Stickier Benchmark for G
+  "citation": "@article{de marneff_simons_tonhauser_2019,\n  title={The CommitmentBank: Investigating projection in naturally occurring discourse},\n  journal={proceedings of Sinn und Bedeutung 23},\n  author={De Marneff, Marie-Catherine and Simons, Mandy and Tonhauser, Judith},\n  year={2019}\n}\n@article{wang2019superglue,\n  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},\n  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and M
