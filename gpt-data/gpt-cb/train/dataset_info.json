@@ -3,4 +3,4 @@
   "citation": "@article{de marneff_simons_tonhauser_2019,\n  title={The CommitmentBank: Investigating projection in naturally occurring discourse},\n  journal={proceedings of Sinn und Bedeutung 23},\n  author={De Marneff, Marie-Catherine and Simons, Mandy and Tonhauser, Judith},\n  year={2019}\n}\n@article{wang2019superglue,\n  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},\n  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},\n  journal={arXiv preprint arXiv:1905.00537},\n  year={2019}\n}\n\nNote that each SuperGLUE dataset has its own citation. Please see the source to\nget the correct citation for each contained dataset.\n",
   "config_name": "cb",
   "dataset_size": 202417,
-  "descript
+  "description": "SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after\nGLUE with a new set of more difficult language understanding tasks, improv
