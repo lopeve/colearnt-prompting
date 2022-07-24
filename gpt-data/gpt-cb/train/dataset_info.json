@@ -4,4 +4,7 @@
   "config_name": "cb",
   "dataset_size": 202417,
   "description": "SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after\nGLUE with a new set of more difficult language understanding tasks, improved\nresources, and a new public leaderboard.\n\nThe CommitmentBank (De Marneffe et al., 2019) is a corpus of short texts in which at least\none sentence contains an embedded clause. Each of these embedded clauses is annotated with the\ndegree to which we expect that the person who wrote the text is committed to the truth of the clause.\nThe resulting task framed as three-class textual entailment on examples that are drawn from the Wall\nStreet Journal, fiction from the British National Corpus, and Switchboard. Each example consists\nof a premise containing an embedded clause and the corresponding hypothesis is the extraction of\nthat clause. We use a subset of the data that had inter-annotator agreement above 0.85. The data is\nimbalanced (relatively fewer neutral examples), so we evaluate using accuracy and F1, where for\nmulti-class F1 we compute the unweighted average of the F1 per class.",
-  "download_checks
+  "download_checksums": {
+    "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/CB.zip": {
+      "num_bytes": 75482,
+      "checksum": "8d641383298d54554066ba1c93f56ae7410af75df62
