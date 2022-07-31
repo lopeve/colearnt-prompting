@@ -15,4 +15,14 @@
     "premise": {
       "dtype": "string",
       "id": null,
-      
+      "_type": "Value"
+    },
+    "hypothesis": {
+      "dtype": "string",
+      "id": null,
+      "_type": "Value"
+    },
+    "idx": {
+      "dtype": "int32",
+      "id": null,
+    
