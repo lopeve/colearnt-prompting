@@ -25,4 +25,12 @@
     "idx": {
       "dtype": "int32",
       "id": null,
-    
+      "_type": "Value"
+    },
+    "label": {
+      "num_classes": 3,
+      "names": [
+        "entailment",
+        "contradiction",
+        "neutral"
+     
