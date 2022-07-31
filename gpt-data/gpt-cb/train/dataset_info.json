@@ -7,4 +7,12 @@
   "download_checksums": {
     "https://dl.fbaipublicfiles.com/glue/superglue/data/v2/CB.zip": {
       "num_bytes": 75482,
-      "checksum": "8d641383298d54554066ba1c93f56ae7410af75df62
+      "checksum": "8d641383298d54554066ba1c93f56ae7410af75df621b90c63028806bbbbb535"
+    }
+  },
+  "download_size": 75482,
+  "features": {
+    "premise": {
+      "dtype": "string",
+      "id": null,
+      
