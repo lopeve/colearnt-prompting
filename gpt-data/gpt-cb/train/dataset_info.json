@@ -60,4 +60,12 @@
       "num_examples": 250,
       "dataset_name": "super_glue"
     },
-    
+    "validation": {
+      "name": "validation",
+      "num_bytes": 21859,
+      "num_examples": 56,
+      "dataset_name": "super_glue"
+    },
+    "test": {
+      "name": "test",
+      "
