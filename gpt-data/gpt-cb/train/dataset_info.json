@@ -52,4 +52,12 @@
   "license": "",
   "post_processed": null,
   "post_processing_size": null,
-  "size_in_bytes": 
+  "size_in_bytes": 277899,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 87058,
+      "num_examples": 250,
+      "dataset_name": "super_glue"
+    },
+    
