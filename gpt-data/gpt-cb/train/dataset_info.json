@@ -68,4 +68,10 @@
     },
     "test": {
       "name": "test",
-      "
+      "num_bytes": 93500,
+      "num_examples": 250,
+      "dataset_name": "super_glue"
+    }
+  },
+  "supervised_keys": null,
+  "task_templat
