@@ -74,4 +74,12 @@
     }
   },
   "supervised_keys": null,
-  "task_templat
+  "task_templates": null,
+  "version": {
+    "version_str": "1.0.2",
+    "description": null,
+    "major": 1,
+    "minor": 0,
+    "patch": 2
+  }
+}
