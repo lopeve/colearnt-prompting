@@ -49,3 +49,37 @@
     }
   },
   "homepage": "https://aclweb.org/aclwiki/Recognizing_Textual_Entailment",
+  "license": "",
+  "post_processed": null,
+  "post_processing_size": null,
+  "size_in_bytes": 2609275,
+  "splits": {
+    "test": {
+      "name": "test",
+      "num_bytes": 974061,
+      "num_examples": 3000,
+      "dataset_name": "glue"
+    },
+    "train": {
+      "name": "train",
+      "num_bytes": 847328,
+      "num_examples": 2490,
+      "dataset_name": "glue"
+    },
+    "validation": {
+      "name": "validation",
+      "num_bytes": 90736,
+      "num_examples": 277,
+      "dataset_name": "glue"
+    }
+  },
+  "supervised_keys": null,
+  "task_templates": null,
+  "version": {
+    "version_str": "1.0.0",
+    "description": "",
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  }
+}
