@@ -6,4 +6,12 @@
   "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.\n\n",
   "download_checksums": {
     "https://dl.fbaipublicfiles.com/glue/data/RTE.zip": {
-      "checksum": "6bf86de103ecd335f3441bd435
+      "checksum": "6bf86de103ecd335f3441bd43574d23fef87ecc695977a63b82d5efb206556ee",
+      "num_bytes": 697150
+    }
+  },
+  "download_size": 697150,
+  "features": {
+    "feat": {
+      "feature": {
+        "d
