@@ -22,4 +22,13 @@
       "id": null,
       "_type": "Sequence"
     },
-    "i
+    "idx": {
+      "dtype": "int32",
+      "id": null,
+      "_type": "Value"
+    },
+    "label": {
+      "num_classes": 2,
+      "names": [
+        "entailment",
+    
