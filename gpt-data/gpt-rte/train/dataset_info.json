@@ -31,4 +31,12 @@
       "num_classes": 2,
       "names": [
         "entailment",
-    
+        "not_entailment"
+      ],
+      "id": null,
+      "_type": "ClassLabel"
+    },
+    "sentence1": {
+      "dtype": "string",
+      "id": null,
+      "
