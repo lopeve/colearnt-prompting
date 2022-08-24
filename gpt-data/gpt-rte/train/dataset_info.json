@@ -39,4 +39,12 @@
     "sentence1": {
       "dtype": "string",
       "id": null,
-      "
+      "_type": "Value"
+    },
+    "sentence2": {
+      "dtype": "string",
+      "id": null,
+      "_type": "Value"
+    }
+  },
+  "homepage": "https://aclweb.
