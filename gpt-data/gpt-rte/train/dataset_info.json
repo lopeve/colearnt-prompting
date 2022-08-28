@@ -52,4 +52,12 @@
   "post_processed": null,
   "post_processing_size": null,
   "size_in_bytes": 2609275,
-  "splits"
+  "splits": {
+    "test": {
+      "name": "test",
+      "num_bytes": 974061,
+      "num_examples": 3000,
+      "dataset_name": "glue"
+    },
+    "train": {
+      "name": "trai
