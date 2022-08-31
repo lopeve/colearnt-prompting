@@ -76,4 +76,9 @@
   "task_templates": null,
   "version": {
     "version_str": "1.0.0",
-    "des
+    "description": "",
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  }
+}
