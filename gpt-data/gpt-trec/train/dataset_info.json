@@ -46,3 +46,32 @@
       "_type": "Sequence"
     }
   },
+  "homepage": "https://cogcomp.seas.upenn.edu/Data/QA/QC/",
+  "license": "",
+  "post_processed": null,
+  "post_processing_size": null,
+  "size_in_bytes": 772285,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 385090,
+      "num_examples": 5452,
+      "dataset_name": "trec"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 27983,
+      "num_examples": 500,
+      "dataset_name": "trec"
+    }
+  },
+  "supervised_keys": null,
+  "task_templates": null,
+  "version": {
+    "version_str": "1.1.0",
+    "description": null,
+    "major": 1,
+    "minor": 1,
+    "patch": 0
+  }
+}
