@@ -259,3 +259,9 @@ if __name__ == "__main__":
 
     if config.allow_skip_exp and os.path.exists(config.finish_flag_file):
         print(f"Skip finished experiment {config.exp_name}")
+    else:
+        print(f"Mark experiment {config.exp_name} as claimed")
+        with open(config.finish_flag_file, "a+") as f:
+            f.write(datetime.now().strftime("%m/%d/%Y %H:%M:%S") + "\n")
+        set_seeds(config.seed)
+        main(config)
