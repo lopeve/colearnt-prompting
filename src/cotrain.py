@@ -125,3 +125,137 @@ def main(config):
             num_labels=dm.num_labels,
             task_name=dm.task_name,
             dataset_reader=dataset_reader,
+            warmup_steps=500,
+            learning_rate=config.bert_lr,
+            weight_decay=config.bert_wd,
+            train_batch_size=16,
+        )
+
+        ckpt_dir=os.path.join(config.exp_dir, 'bert')
+        checkpoint_callback = ModelCheckpoint(dirpath=ckpt_dir,
+                                              save_top_k=1,
+                                              monitor="val_balanced_acc",
+                                              mode='max')
+        trainer = Trainer(
+            max_epochs=config.bert_epochs,
+            accelerator="gpu",
+            devices=1,
+            callbacks=[checkpoint_callback],
+            val_check_interval=0.5,
+        )
+        print("loaded trainer, starting fit")
+        trainer.fit(bert, datamodule=dm)
+
+        # todo: load the best model
+        print(f"GOT BEST CHECKPOINT PATH {trainer.checkpoint_callback.best_model_path}")
+
+        if config.cotrain_load_best:
+            bert = BERT.load_from_checkpoint(trainer.checkpoint_callback.best_model_path)
+
+        # get confidently-pseudolabeled data from bert model
+        ds_dict = get_dsdict_bert(
+            config, dataset_reader, bert
+        )
+
+        # get rid of bert model and clear cuda cache
+        del trainer
+        del bert
+        gc.collect()
+        torch.cuda.empty_cache()
+
+        # reset the t0 model every iter before training it
+        tokenizer, model = get_transformer(config)
+        dataset_reader = get_dataset_reader(config)
+
+        # wrap up pseudolabeled data in a data module for T0
+        datamodule = CotrainDataModule(config, tokenizer, ds_dict, dataset_reader)
+
+        # this wrapper only uses the dataset reader for metrics
+        model = EncoderDecoder(config, tokenizer, model, dataset_reader,
+                               track_metric="balanced_accuracy")
+
+        """
+        ckpt_dir = os.path.join(config.exp_dir, 't0')
+
+        checkpoint_callback = ModelCheckpoint(dirpath=ckpt_dir,
+                                              save_top_k=1,
+                                              monitor="val_balanced_acc",
+                                              mode='max')
+        """
+
+        # fine-tune T0
+        logger = TensorBoardLogger(config.exp_dir, name="log")
+        trainer = Trainer(
+            enable_checkpointing=False,
+            accelerator='gpu',
+            devices=torch.cuda.device_count(),
+            precision=config.compute_precision,
+            amp_backend="native",
+            strategy=config.compute_strategy if config.compute_strategy != "none" else None,
+            logger=logger,
+            log_every_n_steps=4,
+            max_steps=config.num_steps,
+            min_steps=config.num_steps,
+            num_sanity_val_steps=-1 if config.eval_before_training else 0,
+            check_val_every_n_epoch=config.eval_epoch_interval,
+            accumulate_grad_batches=config.grad_accum_factor,
+            gradient_clip_val=config.grad_clip_norm,
+            #callbacks=[checkpoint_callback]
+        )
+
+        trainer.fit(model, datamodule)
+
+        cfg_with_ckpt = copy.deepcopy(config)
+        cfg_with_ckpt.load_weight = os.path.join(config.exp_dir, "best.pt")
+
+        print(f"GOT BEST metric {model.best_metric_val}")
+
+        if config.cotrain_load_best:
+            del model
+            del tokenizer
+            del trainer
+            del datamodule
+            gc.collect()
+            torch.cuda.empty_cache()
+
+            # load the best model to use for the next iteration.
+            # according to (pseudo)-validation performance.
+            tokenizer, model = get_transformer(cfg_with_ckpt)
+            model = EncoderDecoder(cfg_with_ckpt, tokenizer, model, dataset_reader)
+
+    # get the ds dict for the prompt model one last time so that
+    # we write out the metrics for this run.
+    ds_dict = get_dsdict_prompt(
+        config, dataset_reader,
+        tokenizer, model.to('cuda').model,
+    )
+
+    # loop is done.
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--config_files", required=True)
+    parser.add_argument("-k", "--kwargs", nargs="*", action=ParseKwargs, default={})
+    args = parser.parse_args()
+
+    datasets.disable_caching()
+
+    # configure logging at the root level of Lightning
+    #logging.getLogger("pytorch_lightning").setLevel(logging.DEBUG)
+
+    config = Config(args.config_files, args.kwargs)
+    print(f"Start experiment {config.exp_name}")
+    # Setup config
+    assert config.compute_strategy in ["none", "ddp", "deepspeed_stage_3_offload", "deepspeed_stage_3"]
+    if config.fishmask_mode == "create":
+        print("Detecting fishmask_mode=create, override batch_size, num_step, fishmask_path")
+        config.batch_size = 1
+        config.num_steps = config.num_shot
+        config.eval_before_training = False
+        config.fishmask_path = None
+
+    print(config.to_json())
+
+    if config.allow_skip_exp and os.path.exists(config.finish_flag_file):
+        print(f"Skip finished experiment {config.exp_name}")
