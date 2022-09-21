@@ -7,4 +7,4 @@ from .data_module import (
     BERTDataModule,
     LabelModelDataModule
 )
-from .dataset_readers import
+from .dataset_readers import get_dataset_reader
