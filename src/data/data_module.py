@@ -262,3 +262,159 @@ def create_collate_fn(pad_token_id, pretrain):
             )
 
         return output_batch
+
+    return collate_fn
+
+
+# taken and modified from Lightning docs
+class BERTDataModule(LightningDataModule):
+
+    task_text_field_map = {
+        "rte": ["premise", "hypothesis"],
+        "boolq": ["passage", "question"],
+        "cb": ["premise", "hypothesis"],
+        "gpt-rte": ["sentence1", "sentence2"],
+        "gpt-cb": ["premise", "hypothesis"],
+        "gpt-trec": ["text"],
+    }
+
+    glue_task_num_labels = {
+        "rte": 2,
+        "boolq": 2,
+        "cb": 3,
+        "gpt-rte": 2,
+        "gpt-cb": 3,
+        "gpt-trec": 6
+    }
+
+    loader_columns = [
+        "datasets_idx",
+        "input_ids",
+        "token_type_ids",
+        "attention_mask",
+        "start_positions",
+        "end_positions",
+        "labels",
+    ]
+
+    def __init__(
+        self,
+        model_name_or_path: str,
+        task_name: str = "rte",
+        ds_dict: dict = {},
+        max_seq_length: int = 128,
+        train_batch_size: int = 32,
+        eval_batch_size: int = 32,
+        **kwargs,
+    ):
+        super().__init__()
+        self.model_name_or_path = model_name_or_path
+        self.task_name = task_name
+        self.max_seq_length = max_seq_length
+        self.train_batch_size = train_batch_size
+        self.eval_batch_size = eval_batch_size
+        self.dataset = ds_dict
+
+        self.text_fields = self.task_text_field_map[task_name]
+        self.num_labels = self.glue_task_num_labels[task_name]
+
+        # override for mnli-pretrained models
+        if 'mnli' in model_name_or_path:
+            self.num_labels = 3
+
+        print("loading tokenizer")
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name_or_path, use_fast=True)
+        print('loaded tokenizer')
+
+    # called on every proc in DDP
+    def setup(self, stage: str):
+        print("in setup")
+        for split in self.dataset.keys():
+            if 'input_ids' not in self.dataset[split].features:
+                self.dataset[split] = self.dataset[split].map(
+                    self.convert_to_features,
+                    batched=True,
+                    remove_columns="label",
+                )
+            self.columns = [c for c in self.dataset[split].column_names if c in self.loader_columns]
+            self.dataset[split].set_format(type="torch", columns=self.columns)
+
+        print(f"Train size {len(self.dataset['train'])}")
+        if 'validation' in self.dataset:
+            print(f"Eval size {len(self.dataset['validation'])}")
+
+        #self.dataset = datasets.load_dataset("super_glue", self.task_name)
+
+    # called on 1 proc in DDP
+    def prepare_data(self):
+        pass
+        #datasets.load_dataset("super_glue", self.task_name)
+        #AutoTokenizer.from_pretrained(self.model_name_or_path, use_fast=True)
+
+    def train_dataloader(self):
+        return torch.utils.data.DataLoader(self.dataset["train"],
+                                           batch_size=self.train_batch_size,
+                                           shuffle=True,
+                                           num_workers=8)
+
+    def val_dataloader(self):
+        return torch.utils.data.DataLoader(self.dataset["validation"],
+                                           batch_size=self.eval_batch_size,
+                                           num_workers=8)
+
+    def test_dataloader(self):
+        return torch.utils.data.DataLoader(self.dataset["test"], batch_size=self.eval_batch_size,
+                                           num_workers=8)
+
+    def convert_to_features(self, example_batch, indices=None):
+        # Either encode single sentence or sentence pairs
+        if len(self.text_fields) > 1:
+            texts_or_text_pairs = list(zip(example_batch[self.text_fields[0]], example_batch[self.text_fields[1]]))
+        else:
+            texts_or_text_pairs = example_batch[self.text_fields[0]]
+
+        # Tokenize the text/text pairs
+        features = self.tokenizer.batch_encode_plus(
+            texts_or_text_pairs, max_length=self.max_seq_length, padding='max_length', truncation=True
+        )
+
+        # todo jj: this will probably give a key error
+        # Rename label to labels to make it easier to pass to model forward
+        features["labels"] = example_batch["label"]
+
+        return features
+
+
+class LabelModelDataModule(LightningDataModule):
+    def __init__(
+        self,
+        config,
+        ds_dict: dict = {},
+    ):
+        super().__init__()
+        self.config = config
+        self.dataset = ds_dict
+
+    # called on every proc in DDP
+    def setup(self, stage: str):
+        print("in setup")
+        for split in self.dataset.keys():
+            self.columns = [c for c in self.dataset[split].column_names]
+            self.dataset[split] = self.dataset[split].map(
+                self.reshape_features,
+                batched=False
+            )
+
+        print(f"Train size {len(self.dataset['train'])}")
+        if 'validation' in self.dataset:
+            print(f"Eval size {len(self.dataset['validation'])}")
+
+        #self.dataset = datasets.load_dataset("super_glue", self.task_name)
+
+    # called on 1 proc in DDP
+    def prepare_data(self):
+        pass
+        #datasets.load_dataset("super_glue", self.task_name)
+        #AutoTokenizer.from_pretrained(self.model_name_or_path, use_fast=True)
+
+    def reshape_features(self, example):
