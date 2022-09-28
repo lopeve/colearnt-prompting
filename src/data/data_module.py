@@ -418,3 +418,40 @@ class LabelModelDataModule(LightningDataModule):
         #AutoTokenizer.from_pretrained(self.model_name_or_path, use_fast=True)
 
     def reshape_features(self, example):
+        example['feat'] = torch.tensor(example['feat']).reshape(self.config.gpt_num_prompts, -1).tolist()
+        return example
+
+    def create_collate_fn(self):
+        def collate(batch):
+            feat = torch.tensor([item['feat'] for item in batch])
+            labels = torch.tensor([item['label'] for item in batch])
+            return {'feat': feat, 'labels': labels}
+
+        return collate
+
+    def train_dataloader(self):
+        return torch.utils.data.DataLoader(
+            self.dataset["train"],
+            collate_fn=self.create_collate_fn(),
+            batch_size=self.config.batch_size,
+            shuffle=True,
+            num_workers=0
+        )
+
+    def val_dataloader(self):
+        return torch.utils.data.DataLoader(
+            self.dataset["validation"],
+            collate_fn=self.create_collate_fn(),
+            batch_size=self.config.batch_size,
+            num_workers=0,
+            shuffle=False
+        )
+
+    def test_dataloader(self):
+        return torch.utils.data.DataLoader(
+            self.dataset["test"],
+            collate_fn=self.create_collate_fn(),
+            batch_size=self.config.batch_size,
+            num_workers=0,
+            shuffle=False
+        )
