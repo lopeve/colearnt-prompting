@@ -18,3 +18,9 @@ def get_dataset_reader(config):
         "boolq": BoolQReader,
         "h-swag": HSwagReader,
         "copa": COPAReader,
+        "wic": WiCReader,
+        "winogrande": WinograndeReader,
+        "cb": CBReader,
+        "storycloze": StoryClozeReader,
+        "anli-r1": ANLIR1Reader,
+        "anli-r2":
