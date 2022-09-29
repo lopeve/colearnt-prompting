@@ -12,4 +12,9 @@ import pandas as pd
 from sklearn.metrics import balanced_accuracy_score
 
 def get_dataset_reader(config):
-    dataset_class = 
+    dataset_class = {
+        "T0Mixture": T0MixtureReader,
+        "rte": RTEReader,
+        "boolq": BoolQReader,
+        "h-swag": HSwagReader,
+        "copa": COPAReader,
