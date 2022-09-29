@@ -23,4 +23,8 @@ def get_dataset_reader(config):
         "cb": CBReader,
         "storycloze": StoryClozeReader,
         "anli-r1": ANLIR1Reader,
-        "anli-r2":
+        "anli-r2": ANLIR2Reader,
+        "anli-r3": ANLIR3Reader,
+        "wsc": WSCFixedReader,
+        "ade_corpus_v2": RaftReader,
+        "banking_77": RaftRea
