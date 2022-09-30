@@ -32,4 +32,7 @@ def get_dataset_reader(config):
         "tai_safety_research": RaftReader,
         "neurips_impact_statement_risks": RaftReader,
         "overruling": RaftReader,
-      
+        "systematic_review_inclusion": RaftReader,
+        "one_stop_english": RaftReader,
+        "tweet_eval_hate": RaftReader,
+        "twitter_complaints": RaftR
