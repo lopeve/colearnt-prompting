@@ -27,4 +27,9 @@ def get_dataset_reader(config):
         "anli-r3": ANLIR3Reader,
         "wsc": WSCFixedReader,
         "ade_corpus_v2": RaftReader,
-        "banking_77": RaftRea
+        "banking_77": RaftReader,
+        "terms_of_service": RaftReader,
+        "tai_safety_research": RaftReader,
+        "neurips_impact_statement_risks": RaftReader,
+        "overruling": RaftReader,
+      
