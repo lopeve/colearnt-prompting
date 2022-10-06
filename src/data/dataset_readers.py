@@ -41,3 +41,10 @@ def get_dataset_reader(config):
         "gpt-cb": GPTReader,
         "gpt-trec": GPTReader
     }[config.dataset]
+    return dataset_class(config)
+
+
+DATASETS_OFFLINE = "/home/hlang/datasets_offline/"
+GPT_DATA_ROOT="./gpt-data"
+
+MAX_EXAMPLES_PER_DATASET
