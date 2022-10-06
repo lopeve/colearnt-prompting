@@ -47,4 +47,8 @@ def get_dataset_reader(config):
 DATASETS_OFFLINE = "/home/hlang/datasets_offline/"
 GPT_DATA_ROOT="./gpt-data"
 
-MAX_EXAMPLES_PER_DATASET
+MAX_EXAMPLES_PER_DATASET = 500_000
+TASK_BLACKLIST = [
+    # Tasks which often tokenize to > 1024 tokens currently
+    "hotpot_qa_distractor_Generate_Explanations",
+    "hotpot_qa_ful
