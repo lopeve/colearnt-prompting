@@ -54,4 +54,7 @@ TASK_BLACKLIST = [
     "hotpot_qa_fullwiki_Generate_Explanations",
     "hotpot_qa_distractor_Generate_Answer_and_Explanations",
     "hotpot_qa_fullwiki_Generate_Answer_and_Explanations",
-    "hotpo
+    "hotpot_qa_fullwiki_Generate_Answer",
+    "hotpot_qa_distractor_Generate_Answer",
+    "hotpot_qa_distractor_Generate_Title_2",
+    "hotpot_qa_fullwiki_Generate_Titl
