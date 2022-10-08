@@ -51,4 +51,7 @@ MAX_EXAMPLES_PER_DATASET = 500_000
 TASK_BLACKLIST = [
     # Tasks which often tokenize to > 1024 tokens currently
     "hotpot_qa_distractor_Generate_Explanations",
-    "hotpot_qa_ful
+    "hotpot_qa_fullwiki_Generate_Explanations",
+    "hotpot_qa_distractor_Generate_Answer_and_Explanations",
+    "hotpot_qa_fullwiki_Generate_Answer_and_Explanations",
+    "hotpo
