@@ -64,4 +64,9 @@ TASK_BLACKLIST = [
     "hotpot_qa_fullwiki_Generate_Question",
     "tab_fact_tab_fact_tab_fact_3",
     "tab_fact_tab_fact_tab_fact_2",
-    "tab_fact_tab_fact_tab_fa
+    "tab_fact_tab_fact_tab_fact_1",
+    "tab_fact_tab_fact_tab_fact_7",
+    "tab_fact_tab_fact_tab_fact_4",
+    "tab_fact_tab_fact_tab_fact_5",
+    "tab_fact_tab_fact_tab_fact_6",
+    "wik
