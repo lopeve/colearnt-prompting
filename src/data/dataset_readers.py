@@ -72,4 +72,7 @@ TASK_BLACKLIST = [
     "wiki_hop_masked_Choose_Best_Object_Candidate",
     "wiki_hop_masked_Indirect_Question_about_Birthplace_Citizenship_Place_of_Death",
     "narrativeqa_Template_05",
-    "ect
+    "ecthr_cases_alleged_violation_prediction_silver_rationales",
+    # "amazon_polarity/amazon_polarity",
+    # "quail_context_question_answer_description_id",
+    # "qua
