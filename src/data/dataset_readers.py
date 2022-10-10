@@ -69,4 +69,7 @@ TASK_BLACKLIST = [
     "tab_fact_tab_fact_tab_fact_4",
     "tab_fact_tab_fact_tab_fact_5",
     "tab_fact_tab_fact_tab_fact_6",
-    "wik
+    "wiki_hop_masked_Choose_Best_Object_Candidate",
+    "wiki_hop_masked_Indirect_Question_about_Birthplace_Citizenship_Place_of_Death",
+    "narrativeqa_Template_05",
+    "ect
