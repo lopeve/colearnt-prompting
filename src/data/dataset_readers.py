@@ -75,4 +75,6 @@ TASK_BLACKLIST = [
     "ecthr_cases_alleged_violation_prediction_silver_rationales",
     # "amazon_polarity/amazon_polarity",
     # "quail_context_question_answer_description_id",
-    # "qua
+    # "quail_context_question_description_answer_text",
+    # "quail_context_question_answer_description_text",
+    # "quail_context_question_descript
