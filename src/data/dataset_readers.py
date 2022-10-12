@@ -83,4 +83,6 @@ TASK_BLACKLIST = [
     # "quail_context_question_answer_description_text",
     # "quail_context_question_description_answer_id",
     # "quail_description_context_question_text",
-    # "quail_descrip
+    # "quail_description_context_question_answer_text",
+    # 'quail_context_description_question_answer_id',
+    # 'quail_context_description_question_answer
