@@ -112,4 +112,6 @@ class BaseDatasetReader(object):
         self.config = config
         self.dataset_stash = dataset_stash
 
-        #
+        # todo: what does this do on new dataset?
+        self.templates = DatasetTemplates(*self.dataset_stash)
+        self.train_template = self.get_templa
