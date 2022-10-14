@@ -96,4 +96,13 @@ TASK_BLACKLIST = [
     # 'quail_no_prompt_id',
     # 'quail_no_prompt_text',
     # Tasks with broken cached files
-    "gigaword_sum
+    "gigaword_summarize_",
+]
+
+
+class BaseDatasetReader(object):
+    """
+    DatasetReader is responsible for reading and processing dataset
+    """
+
+    def __init__(self, config, datase
