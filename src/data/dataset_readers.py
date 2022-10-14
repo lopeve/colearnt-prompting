@@ -105,4 +105,11 @@ class BaseDatasetReader(object):
     DatasetReader is responsible for reading and processing dataset
     """
 
-    def __init__(self, config, datase
+    def __init__(self, config, dataset_stash):
+        """
+        :param config:
+        """
+        self.config = config
+        self.dataset_stash = dataset_stash
+
+        #
