@@ -92,3 +92,8 @@ TASK_BLACKLIST = [
     # 'quail_context_question_description_text',
     # 'quail_description_context_question_answer_id',
     # 'quail_description_context_question_answer_text',
+    # 'quail_description_context_question_text',
+    # 'quail_no_prompt_id',
+    # 'quail_no_prompt_text',
+    # Tasks with broken cached files
+    "gigaword_sum
