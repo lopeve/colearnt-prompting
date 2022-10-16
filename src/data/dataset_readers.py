@@ -117,4 +117,7 @@ class BaseDatasetReader(object):
         self.train_template = self.get_template(self.config.train_template_idx)
         self.eval_template = self.get_template(self.config.eval_template_idx)
 
-    def get_template(se
+    def get_template(self, template_idx):
+        template_names = self.templates.all_template_names
+        if template_idx >= 0:
+            return self.templates[template_name
