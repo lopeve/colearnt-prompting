@@ -124,4 +124,7 @@ class BaseDatasetReader(object):
         elif template_idx == -1: # random template choice in each step
 
             list_idx = []
-            list_templates 
+            list_templates = []
+            for idx, template_name in enumerate(template_names):
+                if self.templates[template_name].metadata.original_task:
+             
