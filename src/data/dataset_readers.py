@@ -120,4 +120,8 @@ class BaseDatasetReader(object):
     def get_template(self, template_idx):
         template_names = self.templates.all_template_names
         if template_idx >= 0:
-            return self.templates[template_name
+            return self.templates[template_names[template_idx]]
+        elif template_idx == -1: # random template choice in each step
+
+            list_idx = []
+            list_templates 
