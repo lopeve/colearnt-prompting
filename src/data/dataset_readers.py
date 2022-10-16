@@ -114,4 +114,7 @@ class BaseDatasetReader(object):
 
         # todo: what does this do on new dataset?
         self.templates = DatasetTemplates(*self.dataset_stash)
-        self.train_template = self.get_templa
+        self.train_template = self.get_template(self.config.train_template_idx)
+        self.eval_template = self.get_template(self.config.eval_template_idx)
+
+    def get_template(se
