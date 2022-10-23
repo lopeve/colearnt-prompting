@@ -135,4 +135,11 @@ class BaseDatasetReader(object):
         elif template_idx == -2:
             return [self.templates[template_name] for template_name in template_names]
 
-   
+    def get_train_template(self):
+        return self.train_template
+
+    def get_eval_template(self):
+        return self.eval_template
+
+    def get_full_orig_dataset(self):
+    
