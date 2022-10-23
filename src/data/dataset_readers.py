@@ -131,4 +131,8 @@ class BaseDatasetReader(object):
                     list_templates.append(self.templates[template_name])
             print(list_idx)
 
-            return list_tem
+            return list_templates
+        elif template_idx == -2:
+            return [self.templates[template_name] for template_name in template_names]
+
+   
