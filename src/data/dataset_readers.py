@@ -127,4 +127,8 @@ class BaseDatasetReader(object):
             list_templates = []
             for idx, template_name in enumerate(template_names):
                 if self.templates[template_name].metadata.original_task:
-             
+                    list_idx.append(idx)
+                    list_templates.append(self.templates[template_name])
+            print(list_idx)
+
+            return list_tem
