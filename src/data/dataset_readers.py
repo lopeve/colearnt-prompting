@@ -142,4 +142,5 @@ class BaseDatasetReader(object):
         return self.eval_template
 
     def get_full_orig_dataset(self):
-    
+        if (self.config.local_path is not None) and os.path.exists(self.config.local_path):
+            print(f"loading split from {self.config.local_
