@@ -146,4 +146,9 @@ class BaseDatasetReader(object):
             print(f"loading split from {self.config.local_path}")
             orig_data = load_from_disk(self.config.local_path)
         elif os.path.exists(DATASETS_OFFLINE):
-            orig_data = load_from_di
+            orig_data = load_from_disk(os.path.join(DATASETS_OFFLINE, *self.dataset_stash))
+        else:
+            orig_data = load_dataset(*self.dataset_stash)
+        return orig_data
+
+    def read_o
