@@ -157,4 +157,6 @@ class BaseDatasetReader(object):
 
         :param split: split of data
         """
-        if (self.config.l
+        if (self.config.local_path is not None) and os.path.exists(self.config.local_path):
+            print(f"loading split from {self.config.local_path}")
+            orig_da
