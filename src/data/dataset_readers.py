@@ -151,4 +151,10 @@ class BaseDatasetReader(object):
             orig_data = load_dataset(*self.dataset_stash)
         return orig_data
 
-    def read_o
+    def read_orig_dataset(self, split):
+        """
+        Read the original dataset
+
+        :param split: split of data
+        """
+        if (self.config.l
