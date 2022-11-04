@@ -166,4 +166,5 @@ class BaseDatasetReader(object):
             #proxy = {'http': 'socks5://localhost:9000', 'https': 'socks5://localhost:9000'}
             #dl_conf = DownloadConfig(proxies=proxy, )
             orig_data = load_dataset(*self.dataset_stash, split=split)
- 
+            #, cache_dir="/home/hlang/hf_home/datasets")#download_config=dl_conf)#, cache_dir=os.environ["HF_HOME"])#, download_config=dl_conf)
+     
