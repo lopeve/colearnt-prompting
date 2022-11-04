@@ -163,4 +163,7 @@ class BaseDatasetReader(object):
         elif os.path.exists(DATASETS_OFFLINE):
             orig_data = load_from_disk(os.path.join(DATASETS_OFFLINE, *self.dataset_stash))[split]
         else:
-            #proxy = {'http': 'socks5://localhost:9000', 'https': 'socks5:/
+            #proxy = {'http': 'socks5://localhost:9000', 'https': 'socks5://localhost:9000'}
+            #dl_conf = DownloadConfig(proxies=proxy, )
+            orig_data = load_dataset(*self.dataset_stash, split=split)
+ 
