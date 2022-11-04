@@ -167,4 +167,7 @@ class BaseDatasetReader(object):
             #dl_conf = DownloadConfig(proxies=proxy, )
             orig_data = load_dataset(*self.dataset_stash, split=split)
             #, cache_dir="/home/hlang/hf_home/datasets")#download_config=dl_conf)#, cache_dir=os.environ["HF_HOME"])#, download_config=dl_conf)
-     
+        return orig_data
+
+    def read_few_shot_dataset(self):
+        file_dir = os.path.join("data", "few_shot", self.config.dataset, f"{self.config.num_shot}_sho
