@@ -179,4 +179,9 @@ class BaseDatasetReader(object):
         if os.path.exists(file_path):
             with open(file_path, "r") as fin:
                 data = []
-                for
+                for idx, line in enumerate(fin.readlines()):
+                    data.append(json.loads(line.strip("\n")))
+
+            return data
+        else:
+            orig
