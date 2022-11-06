@@ -174,4 +174,9 @@ class BaseDatasetReader(object):
         if not os.path.exists(file_dir):
             os.makedirs(file_dir)
 
-        file_path = os.path.join(file_dir, f"{self.config.few_shot_random
+        file_path = os.path.join(file_dir, f"{self.config.few_shot_random_seed}_seed.jsonl")
+
+        if os.path.exists(file_path):
+            with open(file_path, "r") as fin:
+                data = []
+                for
