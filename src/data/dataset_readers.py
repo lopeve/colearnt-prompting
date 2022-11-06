@@ -170,4 +170,8 @@ class BaseDatasetReader(object):
         return orig_data
 
     def read_few_shot_dataset(self):
-        file_dir = os.path.join("data", "few_shot", self.config.dataset, f"{self.config.num_shot}_sho
+        file_dir = os.path.join("data", "few_shot", self.config.dataset, f"{self.config.num_shot}_shot")
+        if not os.path.exists(file_dir):
+            os.makedirs(file_dir)
+
+        file_path = os.path.join(file_dir, f"{self.config.few_shot_random
