@@ -188,3 +188,6 @@ class BaseDatasetReader(object):
             selected_data = self._sample_few_shot_data(orig_data)
 
             with open(file_path, "w+") as fout:
+                for example in selected_data:
+                    fout.write(json.dumps(example) + "\n")
+            return selecte
