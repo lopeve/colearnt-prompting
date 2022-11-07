@@ -184,4 +184,7 @@ class BaseDatasetReader(object):
 
             return data
         else:
-            orig
+            orig_data = self.read_orig_dataset("train")
+            selected_data = self._sample_few_shot_data(orig_data)
+
+            with open(file_path, "w+") as fout:
