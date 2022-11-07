@@ -190,4 +190,8 @@ class BaseDatasetReader(object):
             with open(file_path, "w+") as fout:
                 for example in selected_data:
                     fout.write(json.dumps(example) + "\n")
-            return selecte
+            return selected_data
+
+    def _sample_few_shot_data(self, orig_data):
+        saved_random_state = np.random.get_state()
+        np.random.seed(self.config.few_shot_rand
