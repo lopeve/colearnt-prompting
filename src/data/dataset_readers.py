@@ -194,4 +194,8 @@ class BaseDatasetReader(object):
 
     def _sample_few_shot_data(self, orig_data):
         saved_random_state = np.random.get_state()
-        np.random.seed(self.config.few_shot_rand
+        np.random.seed(self.config.few_shot_random_seed)
+        orig_data = [x for x in orig_data]
+        np.random.shuffle(orig_data)
+        selected_data = orig_data[: self.config.num_shot]
+        np.random.set_s
