@@ -202,4 +202,6 @@ class BaseDatasetReader(object):
         return selected_data
 
     def compute_metric(self, accumulated):
-        matching = [a == b for a, b i
+        matching = [a == b for a, b in zip(accumulated["prediction"], accumulated["label"])]
+        accuracy = sum(matching) / len(matching)
+        bal_acc = balanced_accuracy_
