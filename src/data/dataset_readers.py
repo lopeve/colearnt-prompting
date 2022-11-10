@@ -198,4 +198,8 @@ class BaseDatasetReader(object):
         orig_data = [x for x in orig_data]
         np.random.shuffle(orig_data)
         selected_data = orig_data[: self.config.num_shot]
-        np.random.set_s
+        np.random.set_state(saved_random_state)
+        return selected_data
+
+    def compute_metric(self, accumulated):
+        matching = [a == b for a, b i
