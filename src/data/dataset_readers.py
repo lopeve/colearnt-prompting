@@ -212,4 +212,10 @@ class StoryClozeReader(BaseDatasetReader):
     def __init__(self, config):
         super().__init__(config, dataset_stash=("story_cloze", "2016"))
 
-    def read_orig_dataset(s
+    def read_orig_dataset(self, split):
+        if split == "train":
+            split = "validation"
+        elif split == "validation":
+            split = "test"
+
+        if os.path.exist
