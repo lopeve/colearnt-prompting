@@ -208,4 +208,8 @@ class BaseDatasetReader(object):
         return {"accuracy": accuracy, "balanced_accuracy": bal_acc}
 
 
-class StoryClozeReader(BaseData
+class StoryClozeReader(BaseDatasetReader):
+    def __init__(self, config):
+        super().__init__(config, dataset_stash=("story_cloze", "2016"))
+
+    def read_orig_dataset(s
