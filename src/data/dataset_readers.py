@@ -204,4 +204,8 @@ class BaseDatasetReader(object):
     def compute_metric(self, accumulated):
         matching = [a == b for a, b in zip(accumulated["prediction"], accumulated["label"])]
         accuracy = sum(matching) / len(matching)
-        bal_acc = balanced_accuracy_
+        bal_acc = balanced_accuracy_score(accumulated["label"], accumulated["prediction"])
+        return {"accuracy": accuracy, "balanced_accuracy": bal_acc}
+
+
+class StoryClozeReader(BaseData
