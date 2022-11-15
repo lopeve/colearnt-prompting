@@ -224,4 +224,7 @@ class StoryClozeReader(BaseDatasetReader):
             orig_data = load_dataset(
                 *self.dataset_stash, split=split, data_dir="/fruitbasket/datasets/hugging_face/story_cloze"
             )
-        orig_data = [example f
+        orig_data = [example for example in orig_data]
+        for idx, example in enumerate(orig_data):
+            example["label"] = example["answer_right_ending"] - 1
+            example["idx"
