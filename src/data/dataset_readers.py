@@ -218,4 +218,7 @@ class StoryClozeReader(BaseDatasetReader):
         elif split == "validation":
             split = "test"
 
-        if os.path.exist
+        if os.path.exists(DATASETS_OFFLINE):
+            orig_data = load_from_disk(os.path.join(DATASETS_OFFLINE, *self.dataset_stash))[split]
+        else:
+            orig_data = load_da
