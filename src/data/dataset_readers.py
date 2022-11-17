@@ -235,4 +235,7 @@ class ANLIR1Reader(BaseDatasetReader):
     def __init__(self, config):
         super().__init__(config, dataset_stash=("anli",))
 
-    
+    def read_orig_dataset(self, split):
+        if split == "validation":
+            split = "test"
+        orig_data = [example for example in super(
