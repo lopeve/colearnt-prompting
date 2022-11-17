@@ -227,4 +227,12 @@ class StoryClozeReader(BaseDatasetReader):
         orig_data = [example for example in orig_data]
         for idx, example in enumerate(orig_data):
             example["label"] = example["answer_right_ending"] - 1
-            example["idx"
+            example["idx"] = idx
+        return orig_data
+
+
+class ANLIR1Reader(BaseDatasetReader):
+    def __init__(self, config):
+        super().__init__(config, dataset_stash=("anli",))
+
+    
