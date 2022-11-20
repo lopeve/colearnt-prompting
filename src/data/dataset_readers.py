@@ -244,4 +244,8 @@ class ANLIR1Reader(BaseDatasetReader):
         return orig_data
 
 
-class ANLIR2Read
+class ANLIR2Reader(BaseDatasetReader):
+    def __init__(self, config):
+        super().__init__(config, dataset_stash=("anli",))
+
+    def read_or
