@@ -251,4 +251,10 @@ class ANLIR2Reader(BaseDatasetReader):
     def read_orig_dataset(self, split):
         if split == "validation":
             split = "test"
-        orig_data = [example for example in super().read_orig_dataset(f"{sp
+        orig_data = [example for example in super().read_orig_dataset(f"{split}_r2")]
+        for idx, example in enumerate(orig_data):
+            example["idx"] = idx
+        return orig_data
+
+
+class ANLIR3Reader(BaseDa
