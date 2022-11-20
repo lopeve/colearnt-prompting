@@ -257,4 +257,9 @@ class ANLIR2Reader(BaseDatasetReader):
         return orig_data
 
 
-class ANLIR3Reader(BaseDa
+class ANLIR3Reader(BaseDatasetReader):
+    def __init__(self, config):
+        super().__init__(config, dataset_stash=("anli",))
+
+    def read_orig_dataset(self, split):
+        if split == "vali
