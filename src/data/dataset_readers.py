@@ -262,4 +262,7 @@ class ANLIR3Reader(BaseDatasetReader):
         super().__init__(config, dataset_stash=("anli",))
 
     def read_orig_dataset(self, split):
-        if split == "vali
+        if split == "validation":
+            split = "test"
+        orig_data = [example for example in super().read_orig_dataset(f"{split}_r3")]
+        for idx, 
