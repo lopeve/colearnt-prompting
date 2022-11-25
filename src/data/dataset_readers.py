@@ -271,4 +271,9 @@ class ANLIR3Reader(BaseDatasetReader):
 
 
 class WSCFixedReader(BaseDatasetReader):
-    def __ini
+    def __init__(self, config):
+        super().__init__(config, dataset_stash=("super_glue", "wsc.fixed"))
+
+
+class RTEReader(BaseDatasetReader):
+    def __init__(
