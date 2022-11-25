@@ -276,4 +276,9 @@ class WSCFixedReader(BaseDatasetReader):
 
 
 class RTEReader(BaseDatasetReader):
-    def __init__(
+    def __init__(self, config):
+        super().__init__(config, dataset_stash=("super_glue", "rte"))
+
+
+class BoolQReader(BaseDatasetReader):
+    def __init__(self, config
