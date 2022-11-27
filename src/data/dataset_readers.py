@@ -287,4 +287,6 @@ class BoolQReader(BaseDatasetReader):
 
 class HSwagReader(BaseDatasetReader):
     def __init__(self, config):
-  
+        super().__init__(config, dataset_stash=("hellaswag",))
+        if config.change_hswag_templates:
+            from promptsource.templates import Te
