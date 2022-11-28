@@ -289,4 +289,10 @@ class HSwagReader(BaseDatasetReader):
     def __init__(self, config):
         super().__init__(config, dataset_stash=("hellaswag",))
         if config.change_hswag_templates:
-            from promptsource.templates import Te
+            from promptsource.templates import Template
+
+            name_jinja = [
+                ("basic", "{{ctx}}|||{{endings [label | int()]}}"),
+                (
+                    "prompt 1",
+   
