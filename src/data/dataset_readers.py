@@ -295,4 +295,7 @@ class HSwagReader(BaseDatasetReader):
                 ("basic", "{{ctx}}|||{{endings [label | int()]}}"),
                 (
                     "prompt 1",
-   
+                    "Can you pick the correct ending for the sentence: {{ctx}}|||{{answer_choices [label | int()]}}",
+                ),
+                (
+ 
