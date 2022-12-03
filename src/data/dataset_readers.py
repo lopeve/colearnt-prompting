@@ -304,4 +304,8 @@ class HSwagReader(BaseDatasetReader):
                 ("prompt 3", "How does this sentence end? {{ctx}}|||{{answer_choices [label | int()]}}"),
                 (
                     "prompt 4",
-                    "From the list of endings described below, what ending makes the most sense for the sentence {{ctx}}|||{{answer_choi
+                    "From the list of endings described below, what ending makes the most sense for the sentence {{ctx}}|||{{answer_choices [label | int()]}}",
+                ),
+                (
+                    "ctx a,b",
+                    "Complete the description with an appropriate end
