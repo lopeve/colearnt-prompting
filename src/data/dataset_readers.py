@@ -308,4 +308,8 @@ class HSwagReader(BaseDatasetReader):
                 ),
                 (
                     "ctx a,b",
-                    "Complete the description with an appropriate end
+                    "Complete the description with an appropriate ending:\n First, {{ ctx_a.lower() }} Then, {{ ctx_b.lower() }} ...|||{{answer_choices [label | int()]}}",
+                ),
+                (
+                    "middle",
+                   
