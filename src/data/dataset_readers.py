@@ -314,4 +314,9 @@ class HSwagReader(BaseDatasetReader):
                     "middle",
                     "If a description of a situation begins like this: {{ ctx }}... Then how does it continue?|||{{answer_choices [label | int()]}}",
                 ),
-      
+            ]
+
+            self.templates = []
+            for name, jinja in name_jinja:
+                self.templates.append(
+                    Templat
