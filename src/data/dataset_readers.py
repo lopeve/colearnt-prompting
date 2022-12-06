@@ -312,4 +312,6 @@ class HSwagReader(BaseDatasetReader):
                 ),
                 (
                     "middle",
-                   
+                    "If a description of a situation begins like this: {{ ctx }}... Then how does it continue?|||{{answer_choices [label | int()]}}",
+                ),
+      
