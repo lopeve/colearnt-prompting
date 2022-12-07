@@ -326,4 +326,7 @@ class HSwagReader(BaseDatasetReader):
                 self.train_template = self.templates[self.config.train_template_idx]
             else:
                 self.train_template = self.templates
-          
+            if self.config.eval_template_idx >= 0:
+                self.eval_template = self.templates[self.config.eval_template_idx]
+            else:
+         
