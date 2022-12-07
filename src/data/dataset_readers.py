@@ -319,4 +319,8 @@ class HSwagReader(BaseDatasetReader):
             self.templates = []
             for name, jinja in name_jinja:
                 self.templates.append(
-                    Templat
+                    Template(name=name, jinja=jinja, reference="", answer_choices='{{endings | join("|||")}}')
+                )
+
+            if self.config.train_template_idx >= 0:
+   
