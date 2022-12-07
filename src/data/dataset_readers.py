@@ -329,4 +329,8 @@ class HSwagReader(BaseDatasetReader):
             if self.config.eval_template_idx >= 0:
                 self.eval_template = self.templates[self.config.eval_template_idx]
             else:
-         
+                self.eval_template = self.templates
+
+    def read_orig_dataset(self, split):
+        orig_data = super().read_orig_dataset(split)
+        def do_map(examp
