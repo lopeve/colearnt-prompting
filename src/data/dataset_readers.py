@@ -337,4 +337,7 @@ class HSwagReader(BaseDatasetReader):
             example["label"] = int(example["label"])
             example["idx"] = idx
             return example
-        orig_data = orig_data.map(do_map, ba
+        orig_data = orig_data.map(do_map, batched=False, with_indices=True)
+
+        #orig_data = [example for example in super().read_orig_dataset(split)]
+        #for idx, example in enumerate(ori
