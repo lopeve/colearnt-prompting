@@ -333,4 +333,8 @@ class HSwagReader(BaseDatasetReader):
 
     def read_orig_dataset(self, split):
         orig_data = super().read_orig_dataset(split)
-        def do_map(examp
+        def do_map(example, idx):
+            example["label"] = int(example["label"])
+            example["idx"] = idx
+            return example
+        orig_data = orig_data.map(do_map, ba
