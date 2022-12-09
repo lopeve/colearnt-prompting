@@ -348,4 +348,9 @@ class HSwagReader(BaseDatasetReader):
         return orig_data
 
 
-class WiCR
+class WiCReader(BaseDatasetReader):
+    def __init__(self, config):
+        super().__init__(config, dataset_stash=("super_glue", "wic"))
+
+
+class COPAReader(Ba
