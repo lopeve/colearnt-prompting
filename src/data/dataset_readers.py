@@ -340,4 +340,12 @@ class HSwagReader(BaseDatasetReader):
         orig_data = orig_data.map(do_map, batched=False, with_indices=True)
 
         #orig_data = [example for example in super().read_orig_dataset(split)]
-        #for idx, example in enumerate(ori
+        #for idx, example in enumerate(orig_data):
+        #example["label"] = int(example["label"])
+        #example["idx"] = idx
+        #return orig_data
+
+        return orig_data
+
+
+class WiCR
