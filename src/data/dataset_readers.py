@@ -362,3 +362,10 @@ class COPAReader(BaseDatasetReader):
             return super().get_template(template_idx)
         else:
             return super().get_template(template_idx)[:8]
+
+
+class WinograndeReader(BaseDatasetReader):
+    def __init__(self, config):
+        super().__init__(config, dataset_stash=("winogrande", "winogrande_xl"))
+
+    def 
