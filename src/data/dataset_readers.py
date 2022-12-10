@@ -358,4 +358,7 @@ class COPAReader(BaseDatasetReader):
         super().__init__(config, dataset_stash=("super_glue", "copa"))
 
     def get_template(self, template_idx):
-       
+        if template_idx >= 0:
+            return super().get_template(template_idx)
+        else:
+            return super().get_template(template_idx)[:8]
