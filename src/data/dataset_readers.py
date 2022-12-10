@@ -353,4 +353,9 @@ class WiCReader(BaseDatasetReader):
         super().__init__(config, dataset_stash=("super_glue", "wic"))
 
 
-class COPAReader(Ba
+class COPAReader(BaseDatasetReader):
+    def __init__(self, config):
+        super().__init__(config, dataset_stash=("super_glue", "copa"))
+
+    def get_template(self, template_idx):
+       
