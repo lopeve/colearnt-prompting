@@ -368,4 +368,7 @@ class WinograndeReader(BaseDatasetReader):
     def __init__(self, config):
         super().__init__(config, dataset_stash=("winogrande", "winogrande_xl"))
 
-    def 
+    def read_orig_dataset(self, split):
+        orig_data = [example for example in super().read_orig_dataset(split)]
+        for idx, example in enumerate(orig_data):
+         
