@@ -371,4 +371,10 @@ class WinograndeReader(BaseDatasetReader):
     def read_orig_dataset(self, split):
         orig_data = [example for example in super().read_orig_dataset(split)]
         for idx, example in enumerate(orig_data):
-         
+            example["label"] = int(example["answer"]) - 1
+            example["idx"] = idx
+        return orig_data
+
+
+class CBReader(BaseDatasetReader):
+    def __init__(
