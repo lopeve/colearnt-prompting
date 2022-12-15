@@ -390,4 +390,8 @@ class T0MixtureReader(object):
         """
         :param config:
         """
-        self.confi
+        self.config = config
+        datatset_subset_tuple = Tuple[str, Optional[str]]
+        t0_train: Dict[str, List[datatset_subset_tuple]] = {
+            "BASE": [],
+            #
