@@ -394,4 +394,9 @@ class T0MixtureReader(object):
         datatset_subset_tuple = Tuple[str, Optional[str]]
         t0_train: Dict[str, List[datatset_subset_tuple]] = {
             "BASE": [],
-            #
+            # GPT3 evaluation set
+            "GPT_EVAL": [],
+            # SuperGLUE (except RTE and CB)
+            "SGLUE": [],
+        }
+        t0_eval: Dict[str, Li
