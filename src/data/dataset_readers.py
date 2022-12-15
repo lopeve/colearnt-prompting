@@ -383,4 +383,11 @@ class CBReader(BaseDatasetReader):
 
 class T0MixtureReader(object):
     """
-    DatasetReader 
+    DatasetReader is responsible for reading and processing dataset
+    """
+
+    def __init__(self, config):
+        """
+        :param config:
+        """
+        self.confi
