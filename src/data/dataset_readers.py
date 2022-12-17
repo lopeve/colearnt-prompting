@@ -408,4 +408,7 @@ class T0MixtureReader(object):
             for row in reader:
                 if row["subset"] == "":
                     row["subset"] = None  # to match promptsource.Template object
-                dataset_subset = (row[
+                dataset_subset = (row["HF_name"], row["subset"])
+                if row["do_train"] != "":
+                    do_train_source = row["do_train"]
+                    # sanity check
