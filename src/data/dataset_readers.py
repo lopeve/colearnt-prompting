@@ -401,4 +401,8 @@ class T0MixtureReader(object):
         }
         t0_eval: Dict[str, List[datatset_subset_tuple]] = {"BASE": [], "BIAS_FAIRNESS": []}
         gsheet: Dict[datatset_subset_tuple, Dict] = {}
-        experiment_pa
+        experiment_path = pkg_resources.resource_filename(__name__, "datasets.csv")
+
+        with open(experiment_path) as exp_file:
+            reader = csv.DictReader(exp_file)
+            for row in r
