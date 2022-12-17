@@ -405,4 +405,7 @@ class T0MixtureReader(object):
 
         with open(experiment_path) as exp_file:
             reader = csv.DictReader(exp_file)
-            for row in r
+            for row in reader:
+                if row["subset"] == "":
+                    row["subset"] = None  # to match promptsource.Template object
+                dataset_subset = (row[
