@@ -414,4 +414,8 @@ class T0MixtureReader(object):
                     # sanity checks
                     if do_train_source == "SGLUE":
                         assert dataset_subset[0] == "super_glue"
-                    t0_train[do_tra
+                    t0_train[do_train_source].append(dataset_subset)
+                if row["do_eval"] != "":
+                    do_eval_source = row["do_eval"]
+                    # sanity checks
+        
