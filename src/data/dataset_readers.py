@@ -411,4 +411,7 @@ class T0MixtureReader(object):
                 dataset_subset = (row["HF_name"], row["subset"])
                 if row["do_train"] != "":
                     do_train_source = row["do_train"]
-                    # sanity check
+                    # sanity checks
+                    if do_train_source == "SGLUE":
+                        assert dataset_subset[0] == "super_glue"
+                    t0_train[do_tra
