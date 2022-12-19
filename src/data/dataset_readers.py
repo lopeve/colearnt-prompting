@@ -418,4 +418,6 @@ class T0MixtureReader(object):
                 if row["do_eval"] != "":
                     do_eval_source = row["do_eval"]
                     # sanity checks
-        
+                    if do_eval_source == "BIAS_FAIRNESS":
+                        assert row["task_by_convention"] == "bias_and_fairness"
+                    t0_eval[do_eva
