@@ -420,4 +420,7 @@ class T0MixtureReader(object):
                     # sanity checks
                     if do_eval_source == "BIAS_FAIRNESS":
                         assert row["task_by_convention"] == "bias_and_fairness"
-                    t0_eval[do_eva
+                    t0_eval[do_eval_source].append(dataset_subset)
+                gsheet[dataset_subset] = row
+
+        all_datasets = sum(t0_train.values(), []) + sum(t0_ev
