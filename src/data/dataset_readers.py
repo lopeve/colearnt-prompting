@@ -423,4 +423,8 @@ class T0MixtureReader(object):
                     t0_eval[do_eval_source].append(dataset_subset)
                 gsheet[dataset_subset] = row
 
-        all_datasets = sum(t0_train.values(), []) + sum(t0_ev
+        all_datasets = sum(t0_train.values(), []) + sum(t0_eval.values(), [])
+        all_templates = templates.TemplateCollection()
+        all_templates.remove("anli")
+
+        # 3 stages of training/ablation: D4 -> GPT -
