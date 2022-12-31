@@ -433,4 +433,7 @@ class T0MixtureReader(object):
         mixture_cap: Dict[str, int] = {}
         single_original_task: Dict[Tuple[str, str], str] = {}
         all_original_tasks: List[str] = []
-        added_tasks: List[
+        added_tasks: List[Tuple[str, str, str]] = []
+
+        def get_task_name(dataset_name, subset_name, template_name):
+            # Clean the text according to allo
