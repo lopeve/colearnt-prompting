@@ -427,4 +427,6 @@ class T0MixtureReader(object):
         all_templates = templates.TemplateCollection()
         all_templates.remove("anli")
 
-        # 3 stages of training/ablation: D4 -> GPT -
+        # 3 stages of training/ablation: D4 -> GPT -> SuperGLUE
+        t0_train_mixture: Dict[str, List[str]] = {key: [] for key in t0_train}
+        t0_eval_mixture: Dict[str, List[str]] = {key: [] for key
