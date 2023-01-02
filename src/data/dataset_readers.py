@@ -438,4 +438,8 @@ class T0MixtureReader(object):
         def get_task_name(dataset_name, subset_name, template_name):
             # Clean the text according to allowed characters for a task name
             task_name = dataset_name + (f"_{subset_name}_" if subset_name is not None else "_") + template_name
-        
+            return re.sub(r"[^\w\d\._]+", "_", task_name)
+
+        for dataset_name, subset_name in all_templates.keys:
+
+            if (dataset_name, subset_name) not in all_
