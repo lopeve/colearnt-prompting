@@ -442,4 +442,7 @@ class T0MixtureReader(object):
 
         for dataset_name, subset_name in all_templates.keys:
 
-            if (dataset_name, subset_name) not in all_
+            if (dataset_name, subset_name) not in all_datasets:
+                all_templates.remove(dataset_name, subset_name)
+                continue
+            dataset = all_templates.get_dataset(dataset_name, sub
