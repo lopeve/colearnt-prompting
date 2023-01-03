@@ -448,4 +448,8 @@ class T0MixtureReader(object):
             dataset = all_templates.get_dataset(dataset_name, subset_name)
             num_templates = len(dataset.all_template_names)
             train_size = gsheet[(dataset_name, subset_name)]["train_size"]
-     
+            if train_size == "":
+                train_size = 0
+            else:
+                train_size = int(train_size)
+            if train_size > MAX_EXAMP
