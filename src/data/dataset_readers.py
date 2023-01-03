@@ -445,4 +445,7 @@ class T0MixtureReader(object):
             if (dataset_name, subset_name) not in all_datasets:
                 all_templates.remove(dataset_name, subset_name)
                 continue
-            dataset = all_templates.get_dataset(dataset_name, sub
+            dataset = all_templates.get_dataset(dataset_name, subset_name)
+            num_templates = len(dataset.all_template_names)
+            train_size = gsheet[(dataset_name, subset_name)]["train_size"]
+     
