@@ -452,4 +452,7 @@ class T0MixtureReader(object):
                 train_size = 0
             else:
                 train_size = int(train_size)
-            if train_size > MAX_EXAMP
+            if train_size > MAX_EXAMPLES_PER_DATASET // num_templates:
+                cap = MAX_EXAMPLES_PER_DATASET // num_templates
+            else:
+                cap = train_s
