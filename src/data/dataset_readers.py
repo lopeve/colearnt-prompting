@@ -463,4 +463,5 @@ class T0MixtureReader(object):
 
                 task_name = get_task_name(dataset_name, subset_name, template_name)
 
-                if (dataset_name,
+                if (dataset_name, subset_name) not in single_original_task and template.metadata.original_task:
+                    single_original_task[(dataset_name, subset_name)] = task_nam
