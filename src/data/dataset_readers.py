@@ -464,4 +464,10 @@ class T0MixtureReader(object):
                 task_name = get_task_name(dataset_name, subset_name, template_name)
 
                 if (dataset_name, subset_name) not in single_original_task and template.metadata.original_task:
-                    single_original_task[(dataset_name, subset_name)] = task_nam
+                    single_original_task[(dataset_name, subset_name)] = task_name
+
+                if template.metadata.original_task:
+                    all_original_tasks.append(task_name)
+
+                # Check that the dataset_subset_tuple is in t0_train
+ 
