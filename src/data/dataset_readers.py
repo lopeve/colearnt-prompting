@@ -459,4 +459,8 @@ class T0MixtureReader(object):
             for template_name in dataset.all_template_names:
                 added_tasks.append((dataset_name, subset_name, template_name))
 
-           
+                template = dataset[template_name]
+
+                task_name = get_task_name(dataset_name, subset_name, template_name)
+
+                if (dataset_name,
