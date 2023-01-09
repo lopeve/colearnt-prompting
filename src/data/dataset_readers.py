@@ -476,4 +476,6 @@ class T0MixtureReader(object):
                         mixture_cap[task_name] = cap
 
                 # Check that the dataset_subset_tuple is in t0_eval
-            
+                if (dataset_name, subset_name) in t0_eval["BASE"]:
+                    if template.metadata.original_task:
+                        t0_eval_mixture[
