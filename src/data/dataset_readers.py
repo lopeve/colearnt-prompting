@@ -472,4 +472,8 @@ class T0MixtureReader(object):
                 # Check that the dataset_subset_tuple is in t0_train
                 for key, dataset_subset_tuples in t0_train.items():
                     if (dataset_name, subset_name) in dataset_subset_tuples:
-                        
+                        t0_train_mixture[key].append(task_name)
+                        mixture_cap[task_name] = cap
+
+                # Check that the dataset_subset_tuple is in t0_eval
+            
