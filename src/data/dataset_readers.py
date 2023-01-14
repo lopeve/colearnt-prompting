@@ -480,4 +480,8 @@ class T0MixtureReader(object):
                     if template.metadata.original_task:
                         t0_eval_mixture["BASE"].append(task_name)
                     # TODO use template.metadata.answer_choices here for rank eval
-                if (dataset_name, subset_nam
+                if (dataset_name, subset_name) in t0_eval["BIAS_FAIRNESS"]:
+                    t0_eval_mixture["BIAS_FAIRNESS"].append(task_name)
+
+        self.t0_base_tasks = []
+        self.t0_base_templa
