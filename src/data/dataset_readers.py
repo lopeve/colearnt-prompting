@@ -484,4 +484,6 @@ class T0MixtureReader(object):
                     t0_eval_mixture["BIAS_FAIRNESS"].append(task_name)
 
         self.t0_base_tasks = []
-        self.t0_base_templa
+        self.t0_base_templates = []
+        for (dataset_name, subset_name, template_name) in added_tasks:
+            task_name = get_task_name(dataset_name, subset_name, templa
