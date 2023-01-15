@@ -489,4 +489,5 @@ class T0MixtureReader(object):
             task_name = get_task_name(dataset_name, subset_name, template_name)
             if task_name in t0_train_mixture["BASE"]:
                 if task_name not in TASK_BLACKLIST:
-                    self.t0_base_task
+                    self.t0_base_tasks.append((dataset_name, subset_name, template_name, mixture_cap[task_name]))
+                    template = all_templates.get_da
