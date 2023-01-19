@@ -494,4 +494,10 @@ class T0MixtureReader(object):
                     self.t0_base_templates.append(template)
 
     def get_template(self):
-        return sel
+        return self.t0_base_templates
+
+    def read_orig_dataset(self, split):
+        """
+        Read the original dataset
+
+        :param split: spl
