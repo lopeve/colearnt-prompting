@@ -504,4 +504,7 @@ class T0MixtureReader(object):
         """
         orig_data = []
         for (dataset_name, subset_name, template_name, cap) in self.t0_base_tasks:
-            print(f"TRYING LOAD FO
+            print(f"TRYING LOAD FOR {dataset_name} {subset_name} {template_name} {cap}")
+            if split == "train":
+                split_num = f"{split}[0:{cap}]"
+           
