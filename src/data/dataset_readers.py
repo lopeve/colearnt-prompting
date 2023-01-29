@@ -500,4 +500,8 @@ class T0MixtureReader(object):
         """
         Read the original dataset
 
-        :param split: spl
+        :param split: split of data
+        """
+        orig_data = []
+        for (dataset_name, subset_name, template_name, cap) in self.t0_base_tasks:
+            print(f"TRYING LOAD FO
