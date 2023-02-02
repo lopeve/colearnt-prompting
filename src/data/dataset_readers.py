@@ -514,4 +514,6 @@ class T0MixtureReader(object):
         return orig_data
 
 
-c
+class RaftTemplate(object):
+    def __init__(self, config, answer_choices):
+        with open(os.path.join(os.path.dirname(__file__), "raft_prompt_construction_settings.json
