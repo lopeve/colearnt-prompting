@@ -516,4 +516,8 @@ class T0MixtureReader(object):
 
 class RaftTemplate(object):
     def __init__(self, config, answer_choices):
-        with open(os.path.join(os.path.dirname(__file__), "raft_prompt_construction_settings.json
+        with open(os.path.join(os.path.dirname(__file__), "raft_prompt_construction_settings.jsonl")) as f:
+            data = [json.loads(line) for line in f]
+            FIELD_ORDERING = data[0]
+            INSTRUCTIONS = data[1]
+        self.dataset_name 
