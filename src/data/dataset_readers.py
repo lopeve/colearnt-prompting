@@ -507,4 +507,11 @@ class T0MixtureReader(object):
             print(f"TRYING LOAD FOR {dataset_name} {subset_name} {template_name} {cap}")
             if split == "train":
                 split_num = f"{split}[0:{cap}]"
-           
+            else:
+                split_num = split
+
+            orig_data.append(load_dataset(dataset_name, subset_name, split=split_num))
+        return orig_data
+
+
+c
