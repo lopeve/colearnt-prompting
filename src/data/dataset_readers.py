@@ -520,4 +520,7 @@ class RaftTemplate(object):
             data = [json.loads(line) for line in f]
             FIELD_ORDERING = data[0]
             INSTRUCTIONS = data[1]
-        self.dataset_name 
+        self.dataset_name = config.dataset
+        self.answer_choices = answer_choices
+        self.instruction = INSTRUCTIONS[self.dataset_name]
+        self.fields = FIELD_ORDERING[self.dataset_name
