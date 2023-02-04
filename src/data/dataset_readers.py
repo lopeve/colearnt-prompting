@@ -527,4 +527,8 @@ class RaftTemplate(object):
         self.raft_labels_in_input_string = config.raft_labels_in_input_string
 
     def apply(self, example):
-        if self.raft_labels_in_input_string == "
+        if self.raft_labels_in_input_string == "comma":
+            input_str = [
+                self.instruction.strip()
+                + " Possible labels: "
+                + ", ".join([choice for index, choice in enum
