@@ -523,4 +523,8 @@ class RaftTemplate(object):
         self.dataset_name = config.dataset
         self.answer_choices = answer_choices
         self.instruction = INSTRUCTIONS[self.dataset_name]
-        self.fields = FIELD_ORDERING[self.dataset_name
+        self.fields = FIELD_ORDERING[self.dataset_name]
+        self.raft_labels_in_input_string = config.raft_labels_in_input_string
+
+    def apply(self, example):
+        if self.raft_labels_in_input_string == "
