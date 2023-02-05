@@ -537,4 +537,10 @@ class RaftTemplate(object):
             input_str = [
                 self.instruction.strip()
                 + "\nPossible labels:\n"
-                + "\n".join([str(index + 1) + ". " + choice for index, choice in enumerat
+                + "\n".join([str(index + 1) + ". " + choice for index, choice in enumerate(self.answer_choices)])
+            ]
+        else:
+            input_str = [self.instruction.strip()]
+
+        for key in example:
+            if key in self.fie
