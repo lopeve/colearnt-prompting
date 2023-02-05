@@ -543,4 +543,8 @@ class RaftTemplate(object):
             input_str = [self.instruction.strip()]
 
         for key in example:
-            if key in self.fie
+            if key in self.fields:
+                if example[key].strip() != "":
+                    input_str.append(str(key) + ": " + example[key].strip())
+
+        if example["label"] == -
