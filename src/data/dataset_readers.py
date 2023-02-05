@@ -535,4 +535,6 @@ class RaftTemplate(object):
             ]
         elif self.raft_labels_in_input_string == "newline":
             input_str = [
-                s
+                self.instruction.strip()
+                + "\nPossible labels:\n"
+                + "\n".join([str(index + 1) + ". " + choice for index, choice in enumerat
