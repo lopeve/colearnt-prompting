@@ -559,4 +559,7 @@ class RaftTemplate(object):
 
 
 class RaftReader(object):
- 
+    def __init__(self, config):
+        self.config = config
+        self.dataset_name = config.dataset
+        self.orig_data = load_dataset("ought/raft", name=self.
