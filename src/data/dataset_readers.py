@@ -547,4 +547,9 @@ class RaftTemplate(object):
                 if example[key].strip() != "":
                     input_str.append(str(key) + ": " + example[key].strip())
 
-        if example["label"] == -
+        if example["label"] == -1:
+            target_str = "Unlabeled"
+        else:
+            target_str = self.answer_choices[example["label"]]
+        input_str[-1] += "\nLabel:"
+       
