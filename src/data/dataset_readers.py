@@ -562,4 +562,6 @@ class RaftReader(object):
     def __init__(self, config):
         self.config = config
         self.dataset_name = config.dataset
-        self.orig_data = load_dataset("ought/raft", name=self.
+        self.orig_data = load_dataset("ought/raft", name=self.dataset_name)
+        self.answer_choices = self.orig_data["train"].features["Label"].names[1:]
+        if self.config.dataset == "banking_77" and config.cleaned
