@@ -552,4 +552,11 @@ class RaftTemplate(object):
         else:
             target_str = self.answer_choices[example["label"]]
         input_str[-1] += "\nLabel:"
-       
+        return input_str, target_str
+
+    def get_answer_choices_list(self, example):
+        return self.answer_choices
+
+
+class RaftReader(object):
+ 
