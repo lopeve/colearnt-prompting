@@ -564,4 +564,7 @@ class RaftReader(object):
         self.dataset_name = config.dataset
         self.orig_data = load_dataset("ought/raft", name=self.dataset_name)
         self.answer_choices = self.orig_data["train"].features["Label"].names[1:]
-        if self.config.dataset == "banking_77" and config.cleaned
+        if self.config.dataset == "banking_77" and config.cleaned_answer_choices_b77:
+            self.answer_choices = [answer.replace("_", " ").replace(". ", " ") for answer in self.answer_choices]
+
+        self.template =
