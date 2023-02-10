@@ -567,4 +567,10 @@ class RaftReader(object):
         if self.config.dataset == "banking_77" and config.cleaned_answer_choices_b77:
             self.answer_choices = [answer.replace("_", " ").replace(". ", " ") for answer in self.answer_choices]
 
-        self.template =
+        self.template = RaftTemplate(config, self.answer_choices)
+
+    def get_train_template(self):
+        return self.template
+
+    def get_eval_template(self):
+        re
