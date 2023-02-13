@@ -581,4 +581,7 @@ class RaftReader(object):
 
         :param split: split of data
         """
-      
+        if self.config.raft_cross_validation:
+            orig_data = [example for example in self.orig_data["train"]]
+            if split == "train":
+ 
