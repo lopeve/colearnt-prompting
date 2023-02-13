@@ -573,4 +573,12 @@ class RaftReader(object):
         return self.template
 
     def get_eval_template(self):
-        re
+        return self.template
+
+    def read_orig_dataset(self, split):
+        """
+        Read the original dataset
+
+        :param split: split of data
+        """
+      
