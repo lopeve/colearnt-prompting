@@ -592,4 +592,7 @@ class RaftReader(object):
                 orig_data = orig_data[self.config.raft_validation_start : self.config.raft_validation_start + 10]
                 assert len(orig_data) == 10
         else:
-            if split =
+            if split == "validation":
+                split = "test"
+            orig_data = [example for example in self.orig_data[split]]
+        for i, example in enumera
