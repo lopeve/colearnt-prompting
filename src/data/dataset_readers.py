@@ -585,4 +585,8 @@ class RaftReader(object):
             orig_data = [example for example in self.orig_data["train"]]
             if split == "train":
                 orig_data = (
-                    orig_data[: self.config.raft_validation_start] + orig_data[self.config.raft_validation_start + 1
+                    orig_data[: self.config.raft_validation_start] + orig_data[self.config.raft_validation_start + 10 :]
+                )
+                assert len(orig_data) == 40
+            elif split == "validation":
+                orig_data = orig_data[s
