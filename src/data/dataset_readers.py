@@ -595,4 +595,6 @@ class RaftReader(object):
             if split == "validation":
                 split = "test"
             orig_data = [example for example in self.orig_data[split]]
-        for i, example in enumera
+        for i, example in enumerate(orig_data):
+            # if self.dataset_name in ['ade_corpus_v2', 'terms_of_service','overruling']:
+            #     example['input'] = example['Sentence'
