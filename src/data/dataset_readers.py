@@ -597,4 +597,7 @@ class RaftReader(object):
             orig_data = [example for example in self.orig_data[split]]
         for i, example in enumerate(orig_data):
             # if self.dataset_name in ['ade_corpus_v2', 'terms_of_service','overruling']:
-            #     example['input'] = example['Sentence'
+            #     example['input'] = example['Sentence'].strip()
+            # elif self.dataset_name in ['banking_77']:
+            #     example['input'] = example['Query'].strip()
+            # elif self.dataset_name in [
