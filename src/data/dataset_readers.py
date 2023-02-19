@@ -600,4 +600,6 @@ class RaftReader(object):
             #     example['input'] = example['Sentence'].strip()
             # elif self.dataset_name in ['banking_77']:
             #     example['input'] = example['Query'].strip()
-            # elif self.dataset_name in [
+            # elif self.dataset_name in ['tai_safety_research']:
+            #     example['input'] = 'Title : ' + example['Title'].strip() + ' ' + \
+            #         'Abstract Note : ' +
