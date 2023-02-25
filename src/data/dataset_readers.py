@@ -604,4 +604,6 @@ class RaftReader(object):
             #     example['input'] = 'Title : ' + example['Title'].strip() + ' ' + \
             #         'Abstract Note : ' + example['Abstract Note'].strip() + ' '+ \
             #             'Url : ' + example['Url'].strip() + ' ' + \
-            #                 'Publication Year
+            #                 'Publication Year : ' + example['Publication Year'].strip() + ' '+ \
+            #                     'Item Type : ' + example['Item Type'].strip() + ' ' + \
+            #      
