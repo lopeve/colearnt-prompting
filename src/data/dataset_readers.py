@@ -602,4 +602,6 @@ class RaftReader(object):
             #     example['input'] = example['Query'].strip()
             # elif self.dataset_name in ['tai_safety_research']:
             #     example['input'] = 'Title : ' + example['Title'].strip() + ' ' + \
-            #         'Abstract Note : ' +
+            #         'Abstract Note : ' + example['Abstract Note'].strip() + ' '+ \
+            #             'Url : ' + example['Url'].strip() + ' ' + \
+            #                 'Publication Year
