@@ -606,4 +606,5 @@ class RaftReader(object):
             #             'Url : ' + example['Url'].strip() + ' ' + \
             #                 'Publication Year : ' + example['Publication Year'].strip() + ' '+ \
             #                     'Item Type : ' + example['Item Type'].strip() + ' ' + \
-            #      
+            #                         'Author : ' + example['Author'].strip() + ' '+ \
+            #                             'Publication Title : '  + example['Publi
