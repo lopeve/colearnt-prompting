@@ -609,4 +609,6 @@ class RaftReader(object):
             #                         'Author : ' + example['Author'].strip() + ' '+ \
             #                             'Publication Title : '  + example['Publication Title'].strip()
             # elif self.dataset_name in ['neurips_impact_statement_risks']:
-            #     example['input'] = 'Paper title : ' + example['Paper title
+            #     example['input'] = 'Paper title : ' + example['Paper title'].strip() + ' ' + \
+            #         'Paper link : ' + example['Paper link'].strip() + ' ' + \
+            #             'Impact statement : ' + example['Impac
