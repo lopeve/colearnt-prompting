@@ -615,4 +615,6 @@ class RaftReader(object):
             # elif self.dataset_name in ['systematic_review_inclusion']:
             #     example['input'] = 'Title : ' + example['Title'].strip() + ' ' + \
             #         'Abstract : ' + example['Abstract'].strip() + ' ' + \
-            #             'Authors : ' + e
+            #             'Authors : ' + example['Authors'].strip() + ' ' + \
+            #                 'Journal : ' + example['Journal'].strip()
+            # elif self.dataset_name in ['one
