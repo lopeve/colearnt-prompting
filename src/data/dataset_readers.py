@@ -617,4 +617,7 @@ class RaftReader(object):
             #         'Abstract : ' + example['Abstract'].strip() + ' ' + \
             #             'Authors : ' + example['Authors'].strip() + ' ' + \
             #                 'Journal : ' + example['Journal'].strip()
-            # elif self.dataset_name in ['one
+            # elif self.dataset_name in ['one_stop_english']:
+            #     example['input'] = example['Article'].strip()
+            # elif self.dataset_name in ['tweet_eval_hate']:
+         
