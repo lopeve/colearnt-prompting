@@ -620,4 +620,6 @@ class RaftReader(object):
             # elif self.dataset_name in ['one_stop_english']:
             #     example['input'] = example['Article'].strip()
             # elif self.dataset_name in ['tweet_eval_hate']:
-         
+            #     example['input'] = example['Tweet'].strip()
+            # elif self.dataset_name in ['twitter_complaints']:
+            #     example['input'] = example['Tw
