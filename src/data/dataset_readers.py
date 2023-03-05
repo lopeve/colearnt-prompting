@@ -624,4 +624,7 @@ class RaftReader(object):
             # elif self.dataset_name in ['twitter_complaints']:
             #     example['input'] = example['Tweet text'].strip()
             # elif self.dataset_name in ['semiconductor_org_types']:
-            #     example['input'] = 'Paper title : ' + example['Paper title'].s
+            #     example['input'] = 'Paper title : ' + example['Paper title'].strip() + \
+            #         'Organization name : ' + example['Organization name'].strip()
+            example["label"] = int(example["Label"]) - 1
+            example["id
