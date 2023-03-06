@@ -635,4 +635,6 @@ class RaftReader(object):
         idxs = accumulated["idx"]
         predictions = accumulated["prediction"]
         for idx, prediction in zip(idxs, predictions):
-            data.append({"ID": idx, "Label": self.ans
+            data.append({"ID": idx, "Label": self.answer_choices[prediction]})
+        result_df = pd.DataFrame(data=data, columns=["ID", "Label"]).astype({"ID": int, "Label": str})
+        result_df.t
