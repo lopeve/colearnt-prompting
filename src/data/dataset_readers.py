@@ -627,4 +627,10 @@ class RaftReader(object):
             #     example['input'] = 'Paper title : ' + example['Paper title'].strip() + \
             #         'Organization name : ' + example['Organization name'].strip()
             example["label"] = int(example["Label"]) - 1
-            example["id
+            example["idx"] = example["ID"]
+        return orig_data
+
+    def compute_metric(self, accumulated):
+        data = []
+        idxs = accumulated["idx"]
+     
