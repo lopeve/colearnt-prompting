@@ -633,4 +633,6 @@ class RaftReader(object):
     def compute_metric(self, accumulated):
         data = []
         idxs = accumulated["idx"]
-     
+        predictions = accumulated["prediction"]
+        for idx, prediction in zip(idxs, predictions):
+            data.append({"ID": idx, "Label": self.ans
