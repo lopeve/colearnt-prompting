@@ -639,4 +639,11 @@ class RaftReader(object):
         result_df = pd.DataFrame(data=data, columns=["ID", "Label"]).astype({"ID": int, "Label": str})
         result_df.to_csv(self.config.dev_pred_file, index=False)
         matching = [a == b for a, b in zip(accumulated["prediction"], accumulated["label"])]
-        accuracy = sum(matc
+        accuracy = sum(matching) / len(matching)
+        return {"accuracy": accuracy}
+
+
+
+class GPTReader(BaseDatasetReader):
+    def __init__(self, config):
+        self.config = confi
