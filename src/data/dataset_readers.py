@@ -646,4 +646,7 @@ class RaftReader(object):
 
 class GPTReader(BaseDatasetReader):
     def __init__(self, config):
-        self.config = confi
+        self.config = config
+        dataset_name = config.dataset
+        # force set local path to enforce load from disk.
+        self.config.local_path = os.path.join(GPT_DATA_
