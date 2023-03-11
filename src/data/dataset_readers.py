@@ -649,4 +649,5 @@ class GPTReader(BaseDatasetReader):
         self.config = config
         dataset_name = config.dataset
         # force set local path to enforce load from disk.
-        self.config.local_path = os.path.join(GPT_DATA_
+        self.config.local_path = os.path.join(GPT_DATA_ROOT, dataset_name)
+        super().__init__(config, (dataset_name,))
