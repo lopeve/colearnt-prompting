@@ -141,3 +141,160 @@ class PHMLinear(torch.nn.Module):
         kronecker_prod=False,
     ) -> None:
         super(PHMLinear, self).__init__()
+        #assert w_init in ["phm", "glorot-normal", "glorot-uniform", "normal"]
+        #assert c_init in ["normal", "uniform"]
+        assert (
+            in_features % phm_dim == 0
+        ), f"Argument `in_features`={in_features} is not divisble be `phm_dim`{phm_dim}"
+        assert (
+            out_features % phm_dim == 0
+        ), f"Argument `out_features`={out_features} is not divisble be `phm_dim`{phm_dim}"
+        self.in_features = in_features
+        self.out_features = out_features
+        self.learn_phm = learn_phm
+        self.phm_dim = phm_dim
+        self._in_feats_per_axis = in_features // phm_dim
+        self._out_feats_per_axis = out_features // phm_dim
+        self.phm_rank = phm_rank
+        self.phm_init_range = phm_init_range
+        self.kronecker_prod = kronecker_prod
+        self.shared_phm_rule = shared_phm_rule
+        self.factorized_phm_rule = factorized_phm_rule
+        self.bias_flag = bias
+        self.w_init = w_init
+        self.c_init = c_init
+        self.shared_W_phm = shared_W_phm
+        self.factorized_phm = factorized_phm
+        if not self.shared_phm_rule:
+            if self.factorized_phm_rule:
+                self.phm_rule_left = nn.Parameter(
+                    torch.FloatTensor(phm_dim, phm_dim, 1), requires_grad=learn_phm
+                )
+                self.phm_rule_right = nn.Parameter(
+                    torch.FloatTensor(phm_dim, 1, phm_dim), requires_grad=learn_phm
+                )
+            else:
+                self.phm_rule = nn.Parameter(
+                    torch.FloatTensor(phm_dim, phm_dim, phm_dim),
+                    requires_grad=learn_phm,
+                )
+        if not self.shared_W_phm:
+            if self.factorized_phm:
+                self.W_left = nn.Parameter(
+                    torch.Tensor(
+                        size=(phm_dim, self._in_feats_per_axis, self.phm_rank)
+                    ),
+                    requires_grad=True,
+                )
+                self.W_right = nn.Parameter(
+                    torch.Tensor(
+                        size=(phm_dim, self.phm_rank, self._out_feats_per_axis)
+                    ),
+                    requires_grad=True,
+                )
+            else:
+                self.W = nn.Parameter(
+                    torch.Tensor(
+                        size=(
+                            phm_dim,
+                            self._in_feats_per_axis,
+                            self._out_feats_per_axis,
+                        )
+                    ),
+                    requires_grad=True,
+                )
+        if self.bias_flag:
+            self.b = nn.Parameter(torch.Tensor(out_features))
+        else:
+            self.register_parameter("b", None)
+        self.reset_parameters()
+
+    def init_W(self):
+        if self.w_init == "glorot-normal":
+            if self.factorized_phm:
+                for i in range(self.phm_dim):
+                    self.W_left.data[i] = glorot_normal(self.W_left.data[i])
+                    self.W_right.data[i] = glorot_normal(self.W_right.data[i])
+            else:
+                for i in range(self.phm_dim):
+                    self.W.data[i] = glorot_normal(self.W.data[i])
+        elif self.w_init == "glorot-uniform":
+            if self.factorized_phm:
+                for i in range(self.phm_dim):
+                    self.W_left.data[i] = glorot_uniform(self.W_left.data[i])
+                    self.W_right.data[i] = glorot_uniform(self.W_right.data[i])
+            else:
+                for i in range(self.phm_dim):
+                    self.W.data[i] = glorot_uniform(self.W.data[i])
+        elif self.w_init == "normal":
+            if self.factorized_phm:
+                for i in range(self.phm_dim):
+                    self.W_left.data[i].normal_(mean=0, std=0.02)
+                    self.W_right.data[i].normal_(mean=0, std=0.02)
+            else:
+                for i in range(self.phm_dim):
+                    self.W.data[i].normal_(mean=0.0, std=0.02)
+        else:
+            #for i in range(self.phm_dim):
+            #        self.W_left.data[i] = init_ones(self.W_left.data[i])
+            #        self.W_right.data[i] = init_ones(self.W_right.data[i])
+            #        #self.W_right.data[i].normal_(mean=0, std=0.02)
+            for i in range(self.phm_dim):
+                self.W_left.data[i] = init_ones(self.W_left.data[i]) / (self._in_feats_per_axis * self.phm_dim)
+                self.W_right.data[i] = init_ones(self.W_right.data[i])
+            #raise ValueError
+
+    def reset_parameters(self):
+        if not self.shared_W_phm:
+            self.init_W()
+
+        if self.bias_flag:
+            self.b.data = torch.zeros_like(self.b.data)
+
+        if not self.shared_phm_rule:
+            if self.factorized_phm_rule:
+                if self.c_init == "uniform":
+                    self.phm_rule_left.data.uniform_(-1, 1)
+                    self.phm_rule_right.data.uniform_(-1, 1)
+                elif self.c_init == "normal":
+                    self.phm_rule_left.data.normal_(std=self.phm_init_range)
+                    self.phm_rule_right.data.normal_(std=self.phm_init_range)
+                else:
+                    raise NotImplementedError
+            else:
+                if self.c_init == "uniform":
+                    self.phm_rule.data.uniform_(-1, 1)
+                elif self.c_init == "normal":
+                    self.phm_rule.data.normal_(mean=0, std=0.02)
+                else:
+                    self.phm_rule.data = init_ones(self.phm_rule.data) / (self.phm_dim * self.phm_dim * self.phm_dim)
+                    #raise NotImplementedError
+
+    def set_phm_rule(self, phm_rule=None, phm_rule_left=None, phm_rule_right=None):
+        """If factorized_phm_rules is set, phm_rule is a tuple, showing the left and right
+        phm rules, and if this is not set, this is showing  the phm_rule."""
+        if self.factorized_phm_rule:
+            self.phm_rule_left = phm_rule_left
+            self.phm_rule_right = phm_rule_right
+        else:
+            self.phm_rule = phm_rule
+
+    def set_W(self, W=None, W_left=None, W_right=None):
+        if self.factorized_phm:
+            self.W_left = W_left
+            self.W_right = W_right
+        else:
+            self.W = W
+
+    def forward(
+        self, x: torch.Tensor, phm_rule: Union[None, nn.ParameterList] = None
+    ) -> torch.Tensor:
+
+        if self.factorized_phm:
+            W = torch.bmm(self.W_left, self.W_right)
+        if self.factorized_phm_rule:
+            phm_rule = torch.bmm(self.phm_rule_left, self.phm_rule_right)
+        y = matvec_product(
+            W=W if self.factorized_phm else self.W,
+            x=x,
+            bias=self.b,
