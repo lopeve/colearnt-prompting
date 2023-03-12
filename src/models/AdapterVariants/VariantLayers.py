@@ -298,3 +298,9 @@ class PHMLinear(torch.nn.Module):
             W=W if self.factorized_phm else self.W,
             x=x,
             bias=self.b,
+            phm_rule=phm_rule if self.factorized_phm_rule else self.phm_rule,
+            kronecker_prod=self.kronecker_prod,
+        )
+        #print("Input", x)
+        #print("Output", y)
+        return y
