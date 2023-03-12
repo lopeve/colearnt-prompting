@@ -101,3 +101,18 @@ class HyperComplexAdapter(nn.Module):
             c_init=config.compacter_phm_c_init,
             phm_dim=config.compacter_hypercomplex_division,
             learn_phm=config.compacter_learn_phm,
+            w_init=config.compacter_hypercomplex_nonlinearity,
+            shared_phm_rule=config.compacter_shared_phm_rule,
+            factorized_phm=config.compacter_factorized_phm,
+            shared_W_phm=config.compacter_shared_W_phm,
+            factorized_phm_rule=config.compacter_factorized_phm_rule,
+            phm_rank=config.compacter_phm_rank,
+            phm_init_range=config.compacter_phm_init_range,
+            kronecker_prod=config.compacter_kronecker_prod,
+        )
+
+    def forward(self, x):
+        z = self.down_sampler(x)
+        z = self.activation(z)
+        z = self.up_sampler(z)
+        return x + z
