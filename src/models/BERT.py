@@ -9,4 +9,11 @@ from torch.optim import AdamW
 from transformers import (
     AutoConfig,
     AutoModelForSequenceClassification,
-    get_lin
+    get_linear_schedule_with_warmup
+)
+import datasets
+from datetime import datetime
+
+# taken and modified from lightning docs
+class BERT(LightningModule):
+    def __init_
