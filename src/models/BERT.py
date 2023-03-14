@@ -22,4 +22,8 @@ class BERT(LightningModule):
         num_labels: int,
         task_name: str,
         dataset_reader,
-        learning_rate: floa
+        learning_rate: float = 2e-5,
+        adam_epsilon: float = 1e-8,
+        warmup_steps: int = 0,
+        weight_decay: float = 0.0,
+        train_batch_size: int = 3
