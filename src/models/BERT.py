@@ -33,4 +33,9 @@ class BERT(LightningModule):
     ):
         super().__init__()
 
-        se
+        self.save_hyperparameters()
+
+        self.model_name_or_path = model_name_or_path
+        self.num_labels = num_labels
+        self.task_name = task_name
+     
