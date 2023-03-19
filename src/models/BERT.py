@@ -44,4 +44,8 @@ class BERT(LightningModule):
 
         if 'roberta' in model_name_or_path:
             module = self.model.roberta
-           
+            pooler = None
+        elif 'deberta' in model_name_or_path:
+            module = self.model.deberta
+            pooler = self.model.pooler
+     
