@@ -40,4 +40,8 @@ class BERT(LightningModule):
         self.task_name = task_name
         print('loading model')
         self.config = AutoConfig.from_pretrained(model_name_or_path, num_labels=num_labels)
-        self.model = AutoModelForSequenceCla
+        self.model = AutoModelForSequenceClassification.from_pretrained(model_name_or_path, config=self.config)
+
+        if 'roberta' in model_name_or_path:
+            module = self.model.roberta
+           
