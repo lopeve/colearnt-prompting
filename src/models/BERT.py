@@ -48,4 +48,10 @@ class BERT(LightningModule):
         elif 'deberta' in model_name_or_path:
             module = self.model.deberta
             pooler = self.model.pooler
-     
+        else:
+            module = self.model.bert
+            pooler = module.pooler
+
+        # turn off everything (including embeddings)
+
+        for param in module.paramete
