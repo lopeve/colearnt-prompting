@@ -63,4 +63,9 @@ class BERT(LightningModule):
             param.requires_grad = True
 
         if pooler is not None:
-           
+            for param in pooler.parameters():
+                param.requires_grad = True
+
+
+        print('loaded model')
+        self.dataset_reader = da
