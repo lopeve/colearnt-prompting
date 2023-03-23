@@ -54,4 +54,8 @@ class BERT(LightningModule):
 
         # turn off everything (including embeddings)
 
-        for param in module.paramete
+        for param in module.parameters():
+            param.requires_grad = False
+
+        # comment these two blocks for linear-only
+        # turn on the last layer and the
