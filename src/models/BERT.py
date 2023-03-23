@@ -58,4 +58,9 @@ class BERT(LightningModule):
             param.requires_grad = False
 
         # comment these two blocks for linear-only
-        # turn on the last layer and the
+        # turn on the last layer and the pooler again.
+        for param in module.encoder.layer[-1].parameters():
+            param.requires_grad = True
+
+        if pooler is not None:
+           
