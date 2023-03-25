@@ -77,4 +77,10 @@ class BERT(LightningModule):
         return self.model(**inputs)
 
     def training_step(self, batch, batch_idx):
-        outputs = self(**batc
+        outputs = self(**batch)
+        loss = outputs[0]
+        return loss
+
+    def validation_step(self, batch, batch_idx, dataloader_idx=0):
+        outputs = self(**batch)
+        val_loss
