@@ -83,4 +83,9 @@ class BERT(LightningModule):
 
     def validation_step(self, batch, batch_idx, dataloader_idx=0):
         outputs = self(**batch)
-        val_loss
+        val_loss, logits = outputs[:2]
+
+        if self.hparams.num_labels > 1:
+            preds = torch.argmax(logits, axis=1)
+        elif self.hparams.num_labels == 1:
+      
