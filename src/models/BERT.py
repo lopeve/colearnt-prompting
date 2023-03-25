@@ -71,3 +71,10 @@ class BERT(LightningModule):
         self.dataset_reader = dataset_reader
         #self.metric = datasets.load_metric(
         #    "super_glue", self.hparams.task_name, experiment_id=datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+        #)
+
+    def forward(self, **inputs):
+        return self.model(**inputs)
+
+    def training_step(self, batch, batch_idx):
+        outputs = self(**batc
