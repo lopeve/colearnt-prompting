@@ -88,4 +88,11 @@ class BERT(LightningModule):
         if self.hparams.num_labels > 1:
             preds = torch.argmax(logits, axis=1)
         elif self.hparams.num_labels == 1:
-      
+            preds = logits.squeeze()
+
+        labels = batch["labels"]
+
+        return {"loss": val_loss, "preds": preds, "labels": labels}
+
+    def validation_epoch_end(self, outputs):
+  
