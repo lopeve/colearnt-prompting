@@ -95,4 +95,5 @@ class BERT(LightningModule):
         return {"loss": val_loss, "preds": preds, "labels": labels}
 
     def validation_epoch_end(self, outputs):
-  
+        preds = torch.cat([x["preds"] for x in outputs]).detach().cpu().numpy()
+        labels = torch.cat([x["labels"] for x in outputs]).detach().cpu().
