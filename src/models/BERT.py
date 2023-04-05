@@ -98,4 +98,7 @@ class BERT(LightningModule):
         preds = torch.cat([x["preds"] for x in outputs]).detach().cpu().numpy()
         labels = torch.cat([x["labels"] for x in outputs]).detach().cpu().numpy()
         loss = torch.stack([x["loss"] for x in outputs]).mean()
-        accumulated = {'prediction': preds, 'label': labe
+        accumulated = {'prediction': preds, 'label': labels}
+        metrics = self.dataset_reader.compute_metric(accumulated)
+        self.log("val_loss", loss, prog_bar=True)
+        self.log("val_balanced_acc", metrics['balan
