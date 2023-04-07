@@ -101,4 +101,9 @@ class BERT(LightningModule):
         accumulated = {'prediction': preds, 'label': labels}
         metrics = self.dataset_reader.compute_metric(accumulated)
         self.log("val_loss", loss, prog_bar=True)
-        self.log("val_balanced_acc", metrics['balan
+        self.log("val_balanced_acc", metrics['balanced_accuracy'], prog_bar=True)
+        self.log_dict(metrics)
+
+
+    def configure_optimizers(self):
+        """Prepare optimizer and schedule (linear warmup and decay
