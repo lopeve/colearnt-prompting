@@ -109,4 +109,7 @@ class BERT(LightningModule):
         """Prepare optimizer and schedule (linear warmup and decay)"""
         model = self.model
         no_decay = ["bias", "LayerNorm.weight"]
-        all_parameters = [(n,p) for (n,p) in model.named_param
+        all_parameters = [(n,p) for (n,p) in model.named_parameters() if p.requires_grad]
+        optimizer_grouped_parameters = [
+            {
+                "params": [p for n, p in all_parameters if not any(nd 
