@@ -112,4 +112,8 @@ class BERT(LightningModule):
         all_parameters = [(n,p) for (n,p) in model.named_parameters() if p.requires_grad]
         optimizer_grouped_parameters = [
             {
-                "params": [p for n, p in all_parameters if not any(nd 
+                "params": [p for n, p in all_parameters if not any(nd in n for nd in no_decay)],
+                "weight_decay": self.hparams.weight_decay,
+            },
+            {
+                "params": [p for n, p in all_para
