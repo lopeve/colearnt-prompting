@@ -120,4 +120,8 @@ class BERT(LightningModule):
                 "weight_decay": 0.0,
             },
         ]
-        optimizer = AdamW(optimizer_grouped_pa
+        optimizer = AdamW(optimizer_grouped_parameters, lr=self.hparams.learning_rate, eps=self.hparams.adam_epsilon)
+
+        scheduler = get_linear_schedule_with_warmup(
+            optimizer,
+            nu
