@@ -127,4 +127,8 @@ class BERT(LightningModule):
             num_warmup_steps=self.hparams.warmup_steps,
             num_training_steps=self.trainer.estimated_stepping_batches,
         )
-        schedul
+        scheduler = {"scheduler": scheduler, "interval": "step", "frequency": 1}
+        return [optimizer], [scheduler]
+
+    def on_train_epoch_end(self, **kwargs):
+        pass
