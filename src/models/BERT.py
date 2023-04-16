@@ -124,4 +124,7 @@ class BERT(LightningModule):
 
         scheduler = get_linear_schedule_with_warmup(
             optimizer,
-            nu
+            num_warmup_steps=self.hparams.warmup_steps,
+            num_training_steps=self.trainer.estimated_stepping_batches,
+        )
+        schedul
