@@ -340,3 +340,5 @@ class EncoderDecoder(LightningModule):
             self._last_global_step_saved = self.global_step
 
     def on_before_optimizer_step(self, optimizer, optimizer_idx):
+        if self.config.fishmask_mode is not None:
+            fishmask_plugin_on_optimizer_step(self)
