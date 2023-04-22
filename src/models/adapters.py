@@ -200,3 +200,41 @@ if __name__ == "__main__":
 
     print("Old model")
     # print(model)
+    # print(model.state_dict().keys())
+    old_param = model.state_dict()
+    with torch.no_grad():
+        old_outputs = model(
+            input_ids=input_seq.input_ids,
+            decoder_input_ids=target_seq.input_ids[:, :-1],
+            labels=target_seq.input_ids[:, 1:],
+        )
+
+    model = modify_with_adapters(model, config)
+    new_param = model.state_dict()
+    """
+    for i in new_param.keys():
+        if "adapter" in i:
+            print(i, new_param[i])
+    """
+    # print(old_param - new_param)
+    print("New model")
+    # print(model)
+    with torch.no_grad():
+        new_outputs = model(
+            input_ids=input_seq.input_ids,
+            decoder_input_ids=target_seq.input_ids[:, :-1],
+            labels=target_seq.input_ids[:, 1:],
+        )
+
+    print("Trainable parameters")
+    """
+    print(
+        [
+            p_name
+            for p_name in dict(model.named_parameters()).keys()
+            if re.fullmatch(config.trainable_param_names, p_name)
+        ]
+    )
+    """
+    print(f"Logits diff {torch.abs(old_outputs.logits - new_outputs.logits).mean():.3f}")
+    print(f"Loss diff old={old_outputs.loss:.3f} new={new_outputs.loss:.3f}")
