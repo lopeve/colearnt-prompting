@@ -9,4 +9,12 @@ def modify_with_bitfit(transformer, config):
             for c_name, layer in dict(module.named_children()).items():
                 if re.fullmatch(config.bitfit_layers, c_name):
                     layer.bias = nn.Parameter(torch.zeros(layer.out_features))
-    return transf
+    return transformer
+
+
+if __name__ == "__main__":
+    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+
+    class BitFitConfig:
+        def __init__(self):
+           
