@@ -17,4 +17,7 @@ if __name__ == "__main__":
 
     class BitFitConfig:
         def __init__(self):
-           
+            self.bitfit_modules = ".*"
+            self.bitfit_layers = "q|k|v|o|w.*"
+            self.trainable_param_names = ".*layer_norm.*|.*bias"
+            #
