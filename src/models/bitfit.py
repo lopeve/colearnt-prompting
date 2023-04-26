@@ -20,4 +20,7 @@ if __name__ == "__main__":
             self.bitfit_modules = ".*"
             self.bitfit_layers = "q|k|v|o|w.*"
             self.trainable_param_names = ".*layer_norm.*|.*bias"
-            #
+            # lora_modules and lora_layers are speicified with regular expressions
+            # see https://www.w3schools.com/python/python_regex.asp for reference
+
+   
