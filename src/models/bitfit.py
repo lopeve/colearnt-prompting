@@ -23,4 +23,8 @@ if __name__ == "__main__":
             # lora_modules and lora_layers are speicified with regular expressions
             # see https://www.w3schools.com/python/python_regex.asp for reference
 
-   
+    config = BitFitConfig()
+    model = AutoModelForSeq2SeqLM.from_pretrained("t5-small")
+    tokenizer = AutoTokenizer.from_pretrained("t5-small")
+
+    input_seq 
