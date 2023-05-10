@@ -27,4 +27,8 @@ if __name__ == "__main__":
     model = AutoModelForSeq2SeqLM.from_pretrained("t5-small")
     tokenizer = AutoTokenizer.from_pretrained("t5-small")
 
-    input_seq 
+    input_seq = tokenizer(
+        ["Applies a linear transformation to the incoming data."],
+        return_tensors="pt",
+    )
+    target_seq =
