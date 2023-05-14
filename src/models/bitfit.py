@@ -31,4 +31,6 @@ if __name__ == "__main__":
         ["Applies a linear transformation to the incoming data."],
         return_tensors="pt",
     )
-    target_seq =
+    target_seq = tokenizer(
+        ["Parameters: in_features - size of each input sample. out_features - size of each output sample."],
+        return_te
