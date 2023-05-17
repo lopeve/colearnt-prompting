@@ -33,4 +33,12 @@ if __name__ == "__main__":
     )
     target_seq = tokenizer(
         ["Parameters: in_features - size of each input sample. out_features - size of each output sample."],
-        return_te
+        return_tensors="pt",
+    )
+
+    print("Old model")
+    print(model)
+    with torch.no_grad():
+        old_outputs = model(
+            input_ids=input_seq.input_ids,
+      
