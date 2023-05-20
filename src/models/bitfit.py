@@ -52,4 +52,9 @@ if __name__ == "__main__":
     with torch.no_grad():
         new_outputs = model(
             input_ids=input_seq.input_ids,
-            
+            decoder_input_ids=target_seq.input_ids[:, :-1],
+            labels=target_seq.input_ids[:, 1:],
+        )
+
+    print("Trainable parameters")
+    pri
