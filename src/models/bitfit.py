@@ -66,4 +66,4 @@ if __name__ == "__main__":
     )
 
     print(f"Logits diff {torch.abs(old_outputs.logits - new_outputs.logits).mean():.3f}")
-    print(f"Loss diff old={old_outputs.loss:.3f} new={new_o
+    print(f"Loss diff old={old_outputs.loss:.3f} new={new_outputs.loss:.3f}")
