@@ -57,4 +57,12 @@ if __name__ == "__main__":
         )
 
     print("Trainable parameters")
-    pri
+    print(
+        [
+            p_name
+            for p_name in dict(model.named_parameters()).keys()
+            if re.fullmatch(config.trainable_param_names, p_name)
+        ]
+    )
+
+ 
