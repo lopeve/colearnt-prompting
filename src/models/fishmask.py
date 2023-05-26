@@ -10,4 +10,6 @@ def fishmask_plugin_on_init(pl_module):
             param.stored_mask = mask_dict[param_name].to("cuda")
 
 
-def fishmask_plug
+def fishmask_plugin_on_optimizer_step(pl_module):
+    if pl_module.config.fishmask_mode == "create":
+        for name, param in pl_module.model.named_parameters():
