@@ -13,3 +13,6 @@ def fishmask_plugin_on_init(pl_module):
 def fishmask_plugin_on_optimizer_step(pl_module):
     if pl_module.config.fishmask_mode == "create":
         for name, param in pl_module.model.named_parameters():
+            if not hasattr(param, "stored_grad"):
+                param.stored_grad = torch.zeros_like(param.data)
+            param.stored_grad +
