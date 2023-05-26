@@ -15,4 +15,7 @@ def fishmask_plugin_on_optimizer_step(pl_module):
         for name, param in pl_module.model.named_parameters():
             if not hasattr(param, "stored_grad"):
                 param.stored_grad = torch.zeros_like(param.data)
-            param.stored_grad +
+            param.stored_grad += torch.square(param.grad) / pl_module.config.num_shot
+            param.grad.zero_()
+    elif pl_module.config.fishmask_mode == "apply":
+        for name, p
