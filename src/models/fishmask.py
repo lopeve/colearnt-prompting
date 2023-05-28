@@ -18,4 +18,7 @@ def fishmask_plugin_on_optimizer_step(pl_module):
             param.stored_grad += torch.square(param.grad) / pl_module.config.num_shot
             param.grad.zero_()
     elif pl_module.config.fishmask_mode == "apply":
-        for name, p
+        for name, param in pl_module.model.named_parameters():
+            param.grad.data *= param.stored_mask
+    else:
+        raise ValueError(f"Invalid fishm
