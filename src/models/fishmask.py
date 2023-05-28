@@ -21,4 +21,10 @@ def fishmask_plugin_on_optimizer_step(pl_module):
         for name, param in pl_module.model.named_parameters():
             param.grad.data *= param.stored_mask
     else:
-        raise ValueError(f"Invalid fishm
+        raise ValueError(f"Invalid fishmask_mode {pl_module.config.fishmask_mode}")
+
+
+def fishmask_plugin_on_end(pl_module):
+    if pl_module.config.fishmask_mode == "create":
+        sizes = {}
+        tens
