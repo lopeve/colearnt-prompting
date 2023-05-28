@@ -27,4 +27,8 @@ def fishmask_plugin_on_optimizer_step(pl_module):
 def fishmask_plugin_on_end(pl_module):
     if pl_module.config.fishmask_mode == "create":
         sizes = {}
-        tens
+        tensors = []
+        all_params_size = 0
+        for param_name, param in pl_module.model.named_parameters():
+            sizes[param_name] = param.size()
+     
