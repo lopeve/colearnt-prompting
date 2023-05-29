@@ -34,4 +34,6 @@ def fishmask_plugin_on_end(pl_module):
             tensors.append(param.stored_grad.view(-1))
             all_params_size += param.numel()
         tensors = torch.cat(tensors, 0).to("cpu")
-       
+        keep_num = int(all_params_size * pl_module.config.fishmask_keep_ratio)
+        assert keep_num > 0
+        top_pos = torch.topk(tensors, keep
