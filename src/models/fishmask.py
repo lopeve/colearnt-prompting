@@ -36,4 +36,8 @@ def fishmask_plugin_on_end(pl_module):
         tensors = torch.cat(tensors, 0).to("cpu")
         keep_num = int(all_params_size * pl_module.config.fishmask_keep_ratio)
         assert keep_num > 0
-        top_pos = torch.topk(tensors, keep
+        top_pos = torch.topk(tensors, keep_num)[1]
+        masks = torch.zeros(tensors.shape, dtype=torch.bool)
+        masks[top_pos] = True
+        del tensors
+        assert masks.long().sum()
