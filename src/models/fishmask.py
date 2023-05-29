@@ -31,4 +31,7 @@ def fishmask_plugin_on_end(pl_module):
         all_params_size = 0
         for param_name, param in pl_module.model.named_parameters():
             sizes[param_name] = param.size()
-     
+            tensors.append(param.stored_grad.view(-1))
+            all_params_size += param.numel()
+        tensors = torch.cat(tensors, 0).to("cpu")
+       
