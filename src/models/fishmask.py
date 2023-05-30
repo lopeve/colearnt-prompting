@@ -46,4 +46,6 @@ def fishmask_plugin_on_end(pl_module):
         now_idx = 0
         for param_name, param_size in sizes.items():
             end_idx = now_idx + param_size.numel()
-   
+            mask_dict[param_name] = masks[now_idx:end_idx].reshape(param_size)
+            now_idx = end_idx
+        assert now_idx == len(masks)
