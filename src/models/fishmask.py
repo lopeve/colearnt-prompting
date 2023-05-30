@@ -40,4 +40,10 @@ def fishmask_plugin_on_end(pl_module):
         masks = torch.zeros(tensors.shape, dtype=torch.bool)
         masks[top_pos] = True
         del tensors
-        assert masks.long().sum()
+        assert masks.long().sum() == len(top_pos)
+        mask_dict = {}
+
+        now_idx = 0
+        for param_name, param_size in sizes.items():
+            end_idx = now_idx + param_size.numel()
+   
