@@ -49,3 +49,8 @@ def fishmask_plugin_on_end(pl_module):
             mask_dict[param_name] = masks[now_idx:end_idx].reshape(param_size)
             now_idx = end_idx
         assert now_idx == len(masks)
+
+        all_params_size = 0
+        trainable_weight_size = 0
+        for param_name, param_mask in mask_dict.items():
+            trainable_weight_size += p
