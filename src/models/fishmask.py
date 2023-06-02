@@ -53,4 +53,7 @@ def fishmask_plugin_on_end(pl_module):
         all_params_size = 0
         trainable_weight_size = 0
         for param_name, param_mask in mask_dict.items():
-            trainable_weight_size += p
+            trainable_weight_size += param_mask.long().sum().item()
+            all_params_size += param_mask.numel()
+
+        print(f"Trainable parameters: {(trainable_weight_size) / a
