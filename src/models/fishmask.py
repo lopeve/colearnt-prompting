@@ -58,4 +58,5 @@ def fishmask_plugin_on_end(pl_module):
 
         print(f"Trainable parameters: {(trainable_weight_size) / all_params_size * 100:.3f} %")
         fishmask_path = os.path.join(pl_module.config.exp_dir, "mask.bin")
-        torch.save(mask_dict, fis
+        torch.save(mask_dict, fishmask_path)
+        print(f"Save gradient mask to {fishmask_path}")
