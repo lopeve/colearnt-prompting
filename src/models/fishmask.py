@@ -56,4 +56,6 @@ def fishmask_plugin_on_end(pl_module):
             trainable_weight_size += param_mask.long().sum().item()
             all_params_size += param_mask.numel()
 
-        print(f"Trainable parameters: {(trainable_weight_size) / a
+        print(f"Trainable parameters: {(trainable_weight_size) / all_params_size * 100:.3f} %")
+        fishmask_path = os.path.join(pl_module.config.exp_dir, "mask.bin")
+        torch.save(mask_dict, fis
