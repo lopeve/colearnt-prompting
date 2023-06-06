@@ -12,4 +12,7 @@
 template <typename scalar_t>
 __global__ void FastWalshHadamardKernel(const int stride, const scalar_t* in, scalar_t* out) {
     const auto idx = (threadIdx.x + blockIdx.x * blockDim.x);
-    const auto elemIdx = (idx / stride ) * (2 * s
+    const auto elemIdx = (idx / stride ) * (2 * stride) + (idx % stride);
+    const auto tmp = in[elemIdx], tmp2 = in[elemIdx + stride];
+    out[elemIdx] = tmp + tmp2;
+    out[elemIdx + stride
