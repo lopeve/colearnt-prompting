@@ -10,4 +10,6 @@
 #include <vector>
 
 template <typename scalar_t>
-__global__ void FastWalshHadamardKernel(const int stride, c
+__global__ void FastWalshHadamardKernel(const int stride, const scalar_t* in, scalar_t* out) {
+    const auto idx = (threadIdx.x + blockIdx.x * blockDim.x);
+    const auto elemIdx = (idx / stride ) * (2 * s
