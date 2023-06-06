@@ -15,4 +15,9 @@ __global__ void FastWalshHadamardKernel(const int stride, const scalar_t* in, sc
     const auto elemIdx = (idx / stride ) * (2 * stride) + (idx % stride);
     const auto tmp = in[elemIdx], tmp2 = in[elemIdx + stride];
     out[elemIdx] = tmp + tmp2;
-    out[elemIdx + stride
+    out[elemIdx + stride] = tmp - tmp2;
+}
+
+template <typename scalar_t>
+__global__ void FastWalshHadamardSubKernel(const scalar_t scalar, scalar_t* out) {
+    const auto i
