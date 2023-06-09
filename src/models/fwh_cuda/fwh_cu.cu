@@ -25,4 +25,8 @@ __global__ void FastWalshHadamardSubKernel(const scalar_t scalar, scalar_t* out)
 }
 
 
-void fast_walsh_hadamard_transform_cuda_kernel(const int NN, const int h
+void fast_walsh_hadamard_transform_cuda_kernel(const int NN, const int halfLL, torch::Tensor in, torch::Tensor out, bool normalize) {
+    // Apply Unnormalized Fast Walsh Hadamard transform
+    int stride = halfLL;
+    float normalizer = 1.0;
+    
