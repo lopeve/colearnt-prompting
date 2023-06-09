@@ -20,4 +20,9 @@ __global__ void FastWalshHadamardKernel(const int stride, const scalar_t* in, sc
 
 template <typename scalar_t>
 __global__ void FastWalshHadamardSubKernel(const scalar_t scalar, scalar_t* out) {
-    const auto i
+    const auto idx = (threadIdx.x + blockIdx.x * blockDim.x);
+    out[idx] *= scalar;
+}
+
+
+void fast_walsh_hadamard_transform_cuda_kernel(const int NN, const int h
