@@ -29,4 +29,9 @@ void fast_walsh_hadamard_transform_cuda_kernel(const int NN, const int halfLL, t
     // Apply Unnormalized Fast Walsh Hadamard transform
     int stride = halfLL;
     float normalizer = 1.0;
+    float sqrt2inv = 0.70710678118654746;
     
+    while (stride >= 1) {
+      if(stride == halfLL)
+      {
+        AT_DISPATCH_FLOATING_TYPES(in.scalar_type(),"fast_walsh_hadamard_tra
