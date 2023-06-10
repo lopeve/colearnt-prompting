@@ -35,4 +35,9 @@ void fast_walsh_hadamard_transform_cuda_kernel(const int NN, const int halfLL, t
       if(stride == halfLL)
       {
         AT_DISPATCH_FLOATING_TYPES(in.scalar_type(),"fast_walsh_hadamard_transform_in", ([&] {
-            FastWalshHadamardKernel<scalar_t><<<max(1, halfLL/256), min(256, halfLL)>>>(stride, in.data_ptr<scalar_t>(), out.data_ptr<scal
+            FastWalshHadamardKernel<scalar_t><<<max(1, halfLL/256), min(256, halfLL)>>>(stride, in.data_ptr<scalar_t>(), out.data_ptr<scalar_t>());
+          }));
+      }
+      else
+      {
+        AT_DISPATCH_FLOATING_TYPES(in.scalar_type(),"fast_walsh_hadamard_transform_out", ([&] {
