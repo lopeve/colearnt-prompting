@@ -42,4 +42,11 @@ void fast_walsh_hadamard_transform_cuda_kernel(const int NN, const int halfLL, t
       {
         AT_DISPATCH_FLOATING_TYPES(in.scalar_type(),"fast_walsh_hadamard_transform_out", ([&] {
             FastWalshHadamardKernel<scalar_t><<<max(1, halfLL/256), min(256, halfLL)>>>(stride, out.data_ptr<scalar_t>(), out.data_ptr<scalar_t>());
-     
+          }));
+      }
+
+      stride /= 2;
+      normalizer *= sqrt2inv;
+    }
+    if(normalize){
+      AT_DISPATCH_FLOATING_TYPES(in.scalar_type(),"fast
