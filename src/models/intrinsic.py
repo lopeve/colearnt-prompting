@@ -34,4 +34,8 @@ def fast_walsh_hadamard_torched(x, axis: int = 0, normalize: bool = True):
     for ii in range(h_dim_exp):
         dim = ii + 1
         arrs = torch.chunk(ret, 2, dim=dim)
-        asser
+        assert len(arrs) == 2
+        ret = torch.cat((arrs[0] + arrs[1], arrs[0] - arrs[1]), axis=dim)
+
+    if normalize:
+        ret = ret / np.sqrt(float(h_d
