@@ -21,3 +21,8 @@ def fast_walsh_hadamard_torched(x, axis: int = 0, normalize: bool = True):
     h_dim_exp = int(round(np.log(h_dim) / np.log(2)))
     assert h_dim == 2 ** h_dim_exp, (
         "hadamard can only be computed over axis with size that is a power of two, but"
+        " chosen axis %d has size %d" % (axis, h_dim)
+    )
+
+    working_shape_pre = [int(torch.prod(torch.tensor(orig_shape[:axis])))]
+  
