@@ -25,4 +25,6 @@ def fast_walsh_hadamard_torched(x, axis: int = 0, normalize: bool = True):
     )
 
     working_shape_pre = [int(torch.prod(torch.tensor(orig_shape[:axis])))]
-  
+    working_shape_post = [int(torch.prod(torch.tensor(orig_shape[axis + 1 :])))]
+    working_shape_mid = [2] * h_dim_exp
+    working_shape = working_shape_pre + working_sh
