@@ -38,4 +38,14 @@ def fast_walsh_hadamard_torched(x, axis: int = 0, normalize: bool = True):
         ret = torch.cat((arrs[0] + arrs[1], arrs[0] - arrs[1]), axis=dim)
 
     if normalize:
-        ret = ret / np.sqrt(float(h_d
+        ret = ret / np.sqrt(float(h_dim))
+
+    ret = ret.view(orig_shape)
+
+    return ret
+
+
+def fastfood_vars(DD, device=0):
+    """
+    Returns parameters for fast food transform
+    :param DD: desired d
