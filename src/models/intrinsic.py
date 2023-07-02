@@ -54,4 +54,10 @@ def fastfood_vars(DD, device=0):
     ll = int(np.ceil(np.log(DD) / np.log(2)))
     LL = 2 ** ll
 
-    # Binary scaling matrix where $B_{i,i} \in \{\pm 1 \}$ dr
+    # Binary scaling matrix where $B_{i,i} \in \{\pm 1 \}$ drawn iid
+    BB = torch.FloatTensor(LL).uniform_(0, 2).type(torch.LongTensor)
+    BB = BB * 2 - 1
+    BB.requires_grad_(False)
+
+    # Random permutation matrix
+    
