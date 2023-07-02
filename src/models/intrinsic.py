@@ -48,4 +48,10 @@ def fast_walsh_hadamard_torched(x, axis: int = 0, normalize: bool = True):
 def fastfood_vars(DD, device=0):
     """
     Returns parameters for fast food transform
-    :param DD: desired d
+    :param DD: desired dimension
+    :return:
+    """
+    ll = int(np.ceil(np.log(DD) / np.log(2)))
+    LL = 2 ** ll
+
+    # Binary scaling matrix where $B_{i,i} \in \{\pm 1 \}$ dr
