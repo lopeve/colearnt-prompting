@@ -63,4 +63,9 @@ def fastfood_vars(DD, device=0):
     Pi = torch.LongTensor(np.random.permutation(LL))
     Pi.requires_grad_(False)
 
-    # Gaussian scaling matrix, whose elements $G_{i,i} \sim \mat
+    # Gaussian scaling matrix, whose elements $G_{i,i} \sim \mathcal{N}(0, 1)$
+    GG = torch.FloatTensor(
+        LL,
+    ).normal_()
+    GG.requires_grad_(False)
+    divisor = torch.sqrt(LL * torch.sum(torch.p
