@@ -60,4 +60,7 @@ def fastfood_vars(DD, device=0):
     BB.requires_grad_(False)
 
     # Random permutation matrix
-    
+    Pi = torch.LongTensor(np.random.permutation(LL))
+    Pi.requires_grad_(False)
+
+    # Gaussian scaling matrix, whose elements $G_{i,i} \sim \mat
