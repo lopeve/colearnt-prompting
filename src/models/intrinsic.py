@@ -80,4 +80,11 @@ def random_vars(desired_dim, intrinsic_dim, device=0):
     return [R, divisor]
 
 
-def fastfood_torched(x, DD: int, param_list: Tuple[torch.Tensor, torch.Tensor, torch.Tensor
+def fastfood_torched(x, DD: int, param_list: Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, int]):
+    """
+    Fastfood transform
+    :param x: array of dd dimension
+    :param DD: desired dimension
+    :return:
+    """
+    dd = x.
