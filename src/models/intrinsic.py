@@ -68,4 +68,9 @@ def fastfood_vars(DD, device=0):
         LL,
     ).normal_()
     GG.requires_grad_(False)
-    divisor = torch.sqrt(LL * torch.sum(torch.p
+    divisor = torch.sqrt(LL * torch.sum(torch.pow(GG, 2)))
+    return [BB.to(device), Pi.to(device), GG.to(device), divisor.to(device), LL]
+
+
+def random_vars(desired_dim, intrinsic_dim, device=0):
+    """Ret
