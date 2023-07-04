@@ -75,4 +75,9 @@ def fastfood_vars(DD, device=0):
 def random_vars(desired_dim, intrinsic_dim, device=0):
     """Returns a random matrix of the desired dimension."""
     R = torch.FloatTensor(desired_dim, intrinsic_dim).normal_(std=0.01).to(device)
-    R.requires_grad_(Fals
+    R.requires_grad_(False)
+    divisor = torch.norm(R)
+    return [R, divisor]
+
+
+def fastfood_torched(x, DD: int, param_list: Tuple[torch.Tensor, torch.Tensor, torch.Tensor
