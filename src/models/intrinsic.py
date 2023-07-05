@@ -92,4 +92,11 @@ def fastfood_torched(x, DD: int, param_list: Tuple[torch.Tensor, torch.Tensor, t
     BB, Pi, GG, divisor, LL = param_list
     # Padd x if needed
     dd_pad = F.pad(x, pad=(0, LL - dd), value=0.0, mode="constant")
-    # From left to ri
+    # From left to right HGPiH(BX), where H is Walsh-Hadamard matrix
+    dd_pad = dd_pad * BB
+
+    # HGPi(HBX)
+    mul_2 = FastWalshHadamard.apply(dd_pad)
+
+    # HG(PiHBX)
+    mul_3 =
