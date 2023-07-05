@@ -87,4 +87,9 @@ def fastfood_torched(x, DD: int, param_list: Tuple[torch.Tensor, torch.Tensor, t
     :param DD: desired dimension
     :return:
     """
-    dd = x.
+    dd = x.size(0)
+
+    BB, Pi, GG, divisor, LL = param_list
+    # Padd x if needed
+    dd_pad = F.pad(x, pad=(0, LL - dd), value=0.0, mode="constant")
+    # From left to ri
