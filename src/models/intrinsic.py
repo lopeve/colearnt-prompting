@@ -99,4 +99,13 @@ def fastfood_torched(x, DD: int, param_list: Tuple[torch.Tensor, torch.Tensor, t
     mul_2 = FastWalshHadamard.apply(dd_pad)
 
     # HG(PiHBX)
-    mul_3 =
+    mul_3 = mul_2[Pi]
+
+    # H(GPiHBX)
+    mul_3 = mul_3 * GG
+
+    # (HGPiHBX)
+    mul_5 = FastWalshHadamard.apply(mul_3)
+
+    ret = mul_5[: int(DD)]
+    ret = ret /
