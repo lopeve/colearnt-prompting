@@ -108,4 +108,10 @@ def fastfood_torched(x, DD: int, param_list: Tuple[torch.Tensor, torch.Tensor, t
     mul_5 = FastWalshHadamard.apply(mul_3)
 
     ret = mul_5[: int(DD)]
-    ret = ret /
+    ret = ret / (divisor * np.sqrt(float(DD) / LL))
+    return ret
+
+
+def random_torched(intrinsic_vec, param_list: Tuple[torch.Tensor, int]):
+    """Random dense transform"""
+    R
