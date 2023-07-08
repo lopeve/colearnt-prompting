@@ -123,4 +123,7 @@ def random_torched(intrinsic_vec, param_list: Tuple[torch.Tensor, int]):
 class FastWalshHadamard(torch.autograd.Function):
     @staticmethod
     def forward(ctx, input):
-        ctx.save_for_backward(torch.tensor([1 / np.s
+        ctx.save_for_backward(torch.tensor([1 / np.sqrt(float(input.size(0)))]).to(input))
+        if input.is_cuda:
+            return fast_walsh_hadamard_transform_cuda(input.float(), False)
+        el
