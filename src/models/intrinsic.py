@@ -117,4 +117,10 @@ def random_torched(intrinsic_vec, param_list: Tuple[torch.Tensor, int]):
     R, divisor = param_list
     result = torch.matmul(R, intrinsic_vec)
     # TODO: for now we are not normalizing with the divisor, to be added later.
-  
+    return result
+
+
+class FastWalshHadamard(torch.autograd.Function):
+    @staticmethod
+    def forward(ctx, input):
+        ctx.save_for_backward(torch.tensor([1 / np.s
