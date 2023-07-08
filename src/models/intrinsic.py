@@ -114,4 +114,7 @@ def fastfood_torched(x, DD: int, param_list: Tuple[torch.Tensor, torch.Tensor, t
 
 def random_torched(intrinsic_vec, param_list: Tuple[torch.Tensor, int]):
     """Random dense transform"""
-    R
+    R, divisor = param_list
+    result = torch.matmul(R, intrinsic_vec)
+    # TODO: for now we are not normalizing with the divisor, to be added later.
+  
