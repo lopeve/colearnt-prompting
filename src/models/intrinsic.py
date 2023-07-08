@@ -126,4 +126,9 @@ class FastWalshHadamard(torch.autograd.Function):
         ctx.save_for_backward(torch.tensor([1 / np.sqrt(float(input.size(0)))]).to(input))
         if input.is_cuda:
             return fast_walsh_hadamard_transform_cuda(input.float(), False)
-        el
+        else:
+            return fast_walsh_hadamard_torched(input.float(), normalize=False)
+
+    @staticmethod
+    def backward(ctx, grad_output):
+        (input,) = 
