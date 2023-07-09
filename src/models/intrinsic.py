@@ -139,4 +139,9 @@ class FastWalshHadamard(torch.autograd.Function):
 
 
 class IntrinsicDimensionLight:
-  
+    def __init__(
+        self,
+        module: nn.Module,
+        intrinsic_dimension: int,
+        str_filter: Set[str] = set(),
+        said=Fa
