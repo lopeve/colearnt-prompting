@@ -134,3 +134,9 @@ class FastWalshHadamard(torch.autograd.Function):
         (input,) = ctx.saved_tensors
         if grad_output.is_cuda:
             return input * fast_walsh_hadamard_transform_cuda(grad_output.clone().float(), False).to(grad_output)
+        else:
+            return input * fast_walsh_hadamard_torched(grad_output.clone().float(), normalize=False).to(grad_output)
+
+
+class IntrinsicDimensionLight:
+  
