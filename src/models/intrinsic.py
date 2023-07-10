@@ -144,4 +144,9 @@ class IntrinsicDimensionLight:
         module: nn.Module,
         intrinsic_dimension: int,
         str_filter: Set[str] = set(),
-        said=Fa
+        said=False,
+        projection="fastfood",
+        device="cpu",
+    ):
+        """
+        Adds hook only for the parameters selected inside the str_
