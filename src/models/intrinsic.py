@@ -153,4 +153,9 @@ class IntrinsicDimensionLight:
         all the parameters with gradient = True.
         """
         self.projection = projection
-        self.name
+        self.name_base_localname = []
+        self.initial_value = dict()
+        self.projection_params = {}
+        self.said = said
+        self.device = device
+        self.said_size = l
