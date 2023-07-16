@@ -149,4 +149,8 @@ class IntrinsicDimensionLight:
         device="cpu",
     ):
         """
-        Adds hook only for the parameters selected inside the str_
+        Adds hook only for the parameters selected inside the str_filter, and if str_filter is empty, this selects
+        all the parameters with gradient = True.
+        """
+        self.projection = projection
+        self.name
