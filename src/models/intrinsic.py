@@ -158,4 +158,7 @@ class IntrinsicDimensionLight:
         self.projection_params = {}
         self.said = said
         self.device = device
-        self.said_size = l
+        self.said_size = len(list(module.named_parameters()))
+        if self.said:
+            assert intrinsic_dimension > self.said_size
+            intrinsic_dimension -= self.said_size + 1
