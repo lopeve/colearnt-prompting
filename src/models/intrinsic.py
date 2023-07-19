@@ -162,3 +162,7 @@ class IntrinsicDimensionLight:
         if self.said:
             assert intrinsic_dimension > self.said_size
             intrinsic_dimension -= self.said_size + 1
+
+        length = 0
+        for name, param in module.named_parameters():
+            if param.requires_grad and (len(str_filter) == 0 or any([x in nam
