@@ -167,4 +167,7 @@ class IntrinsicDimensionLight:
         for name, param in module.named_parameters():
             if param.requires_grad and (len(str_filter) == 0 or any([x in name for x in str_filter])):
                 length += 1
-                self.initial_value[name] = v0 = param.clone().detach().requires_grad_(False).to(s
+                self.initial_value[name] = v0 = param.clone().detach().requires_grad_(False).to(self.device)
+                # DD = np.prod(v0.size())
+                DD = np.sum(v0.size())
+                self.projection_params[name] = self.get_projection_par
