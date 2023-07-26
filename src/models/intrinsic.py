@@ -170,4 +170,10 @@ class IntrinsicDimensionLight:
                 self.initial_value[name] = v0 = param.clone().detach().requires_grad_(False).to(self.device)
                 # DD = np.prod(v0.size())
                 DD = np.sum(v0.size())
-                self.projection_params[name] = self.get_projection_par
+                self.projection_params[name] = self.get_projection_params(DD, self.device)
+                base, localname = module, name
+                while "." in localname:
+                    prefix, localname = localname.split(".", 1)
+                    base = base.__getattr__(prefix)
+                self.name_base_localname.append((name, base, localname))
+                param.requires_gr
