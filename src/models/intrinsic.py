@@ -176,4 +176,7 @@ class IntrinsicDimensionLight:
                     prefix, localname = localname.split(".", 1)
                     base = base.__getattr__(prefix)
                 self.name_base_localname.append((name, base, localname))
-                param.requires_gr
+                param.requires_grad_(False)
+
+        self.intrinsic_dimension = intrinsic_dimension
+        self.intrinsic_parameter = nn.Parameter(torch.zeros((intrinsic_dimension), device=
