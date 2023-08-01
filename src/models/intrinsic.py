@@ -181,4 +181,8 @@ class IntrinsicDimensionLight:
         self.intrinsic_dimension = intrinsic_dimension
         self.intrinsic_parameter = nn.Parameter(torch.zeros((intrinsic_dimension), device=self.device))
         module.intrinsic_parameter = self.intrinsic_parameter
-        # module.register_parameter("intrinsic_parameter", self.intrinsic_param
+        # module.register_parameter("intrinsic_parameter", self.intrinsic_parameter)
+        # setattr(module, "intrinsic_parameter", self.intrinsic_parameter)
+
+        if said:
+            self.intrinsic_parameter_said = nn.Parame
