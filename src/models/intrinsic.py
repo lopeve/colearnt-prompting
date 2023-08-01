@@ -187,4 +187,7 @@ class IntrinsicDimensionLight:
         if said:
             self.intrinsic_parameter_said = nn.Parameter(torch.ones((length), device=self.device))
             module.intrinsic_parameter_said = self.intrinsic_parameter_said
-            # module.registe
+            # module.register_parameter("intrinsic_parameter_said", self.intrinsic_parameter_said)
+            # setattr(module, "intrinsic_parameter_said", self.intrinsic_parameter_said)
+
+    def get_p
