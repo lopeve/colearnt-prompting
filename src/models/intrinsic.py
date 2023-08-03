@@ -190,4 +190,7 @@ class IntrinsicDimensionLight:
             # module.register_parameter("intrinsic_parameter_said", self.intrinsic_parameter_said)
             # setattr(module, "intrinsic_parameter_said", self.intrinsic_parameter_said)
 
-    def get_p
+    def get_projection_params(self, DD, device):
+        if self.projection == "fastfood":
+            return fastfood_vars(DD, device)
+        elif self.projection == "random
