@@ -197,4 +197,9 @@ class IntrinsicDimensionLight:
             return random_vars(DD, self.intrinsic_dimension, device)
 
     def move_to(self, x_tuple, target):
-        if isinstance(x_tuple, torc
+        if isinstance(x_tuple, torch.Tensor):
+            return x_tuple.to(target)
+        a = []
+        for x in x_tuple:
+            if isinstance(x, torch.Tensor):
+                a
