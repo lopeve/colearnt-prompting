@@ -193,4 +193,8 @@ class IntrinsicDimensionLight:
     def get_projection_params(self, DD, device):
         if self.projection == "fastfood":
             return fastfood_vars(DD, device)
-        elif self.projection == "random
+        elif self.projection == "random":
+            return random_vars(DD, self.intrinsic_dimension, device)
+
+    def move_to(self, x_tuple, target):
+        if isinstance(x_tuple, torc
