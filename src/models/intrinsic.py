@@ -212,4 +212,8 @@ class IntrinsicDimensionLight:
     #         x_tuple.requires_grad_(target)
     #     for x in x_tuple:
     #         if isinstance(x, torch.Tensor):
-    # 
+    #             x.requires_grad_(target)
+
+    # def projection_vars_requires_grad_(self, requires_grad):
+    #     for item in self.projection_params.items():
+    #         self.
