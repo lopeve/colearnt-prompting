@@ -202,4 +202,10 @@ class IntrinsicDimensionLight:
         a = []
         for x in x_tuple:
             if isinstance(x, torch.Tensor):
-                a
+                a.append(x.to(target))
+            else:
+                a.append(x)
+        return tuple(a)
+
+    # def requires_to(self, x_tuple, target):
+    #     if isinstance(x_
