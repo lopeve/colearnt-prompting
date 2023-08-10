@@ -208,4 +208,8 @@ class IntrinsicDimensionLight:
         return tuple(a)
 
     # def requires_to(self, x_tuple, target):
-    #     if isinstance(x_
+    #     if isinstance(x_tuple, torch.Tensor):
+    #         x_tuple.requires_grad_(target)
+    #     for x in x_tuple:
+    #         if isinstance(x, torch.Tensor):
+    # 
