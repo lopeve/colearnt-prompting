@@ -216,4 +216,7 @@ class IntrinsicDimensionLight:
 
     # def projection_vars_requires_grad_(self, requires_grad):
     #     for item in self.projection_params.items():
-    #         self.
+    #         self.requires_to(item, requires_grad)
+
+    def get_projected_param(self, intrinsic_vec, DD, projection_params, init_shape):
+        if self.projection == "fas
