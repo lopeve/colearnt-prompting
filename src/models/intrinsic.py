@@ -219,4 +219,8 @@ class IntrinsicDimensionLight:
     #         self.requires_to(item, requires_grad)
 
     def get_projected_param(self, intrinsic_vec, DD, projection_params, init_shape):
-        if self.projection == "fas
+        if self.projection == "fastfood":
+            # return fastfood_torched(intrinsic_vec, DD, projection_params).view(
+            #         init_shape
+            #     )
+            return f
