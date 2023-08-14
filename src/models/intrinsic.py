@@ -223,4 +223,6 @@ class IntrinsicDimensionLight:
             # return fastfood_torched(intrinsic_vec, DD, projection_params).view(
             #         init_shape
             #     )
-            return f
+            return fastfood_torched(intrinsic_vec, DD, projection_params)
+        elif self.projection == "random":
+            return random_torched(intrinsic_vec, projection_param
