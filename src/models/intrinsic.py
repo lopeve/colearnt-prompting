@@ -225,4 +225,9 @@ class IntrinsicDimensionLight:
             #     )
             return fastfood_torched(intrinsic_vec, DD, projection_params)
         elif self.projection == "random":
-            return random_torched(intrinsic_vec, projection_param
+            return random_torched(intrinsic_vec, projection_params).view(init_shape)
+
+    def __call__(self, module):
+        index = 0
+        # with torch.enable_grad():
+        for name, base, localnam
