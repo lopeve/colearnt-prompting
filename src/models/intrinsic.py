@@ -230,4 +230,8 @@ class IntrinsicDimensionLight:
     def __call__(self, module):
         index = 0
         # with torch.enable_grad():
-        for name, base, localnam
+        for name, base, localname in self.name_base_localname:
+            if localname == "intrinsic_parameter":
+                continue
+            if self.device == "cpu":
+              
