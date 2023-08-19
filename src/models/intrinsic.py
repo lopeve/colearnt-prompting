@@ -237,4 +237,8 @@ class IntrinsicDimensionLight:
                 self.initial_value[name] = self.initial_value[name].to(getattr(base, localname))
                 device_dtype = getattr(base, localname).dtype
 
-            init_shape = self.initi
+            init_shape = self.initial_value[name].size()
+            # DD = np.prod(init_shape)
+            DD = np.sum(init_shape)
+            if self.device == "cpu":
+             
