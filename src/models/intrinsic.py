@@ -234,4 +234,7 @@ class IntrinsicDimensionLight:
             if localname == "intrinsic_parameter":
                 continue
             if self.device == "cpu":
-              
+                self.initial_value[name] = self.initial_value[name].to(getattr(base, localname))
+                device_dtype = getattr(base, localname).dtype
+
+            init_shape = self.initi
