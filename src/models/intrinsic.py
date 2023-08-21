@@ -241,4 +241,8 @@ class IntrinsicDimensionLight:
             # DD = np.prod(init_shape)
             DD = np.sum(init_shape)
             if self.device == "cpu":
-             
+                self.projection_params[name] = self.move_to(
+                    self.projection_params[name], module.intrinsic_parameter.device
+                )
+
+            # ray 
