@@ -245,4 +245,5 @@ class IntrinsicDimensionLight:
                     self.projection_params[name], module.intrinsic_parameter.device
                 )
 
-            # ray 
+            # ray = self.get_projected_param(module.intrinsic_parameter, DD, self.projection_params[name], init_shape)
+            ray = self.get_projected_param
