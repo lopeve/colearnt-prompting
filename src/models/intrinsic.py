@@ -246,4 +246,6 @@ class IntrinsicDimensionLight:
                 )
 
             # ray = self.get_projected_param(module.intrinsic_parameter, DD, self.projection_params[name], init_shape)
-            ray = self.get_projected_param
+            ray = self.get_projected_param(module.intrinsic_parameter, DD, self.projection_params[name], None)
+            if len(init_shape) == 2:
+                first_vector = ray
