@@ -251,4 +251,6 @@ class IntrinsicDimensionLight:
                 first_vector = ray[0 : init_shape[0]]
                 if self.said:
                     first_vector = first_vector * self.intrinsic_parameter_said[index]
-                s
+                second_vector = ray[init_shape[0] :]
+                param = torch.addmm(self.initial_value[name], first_vector.unsqueeze(1), second_vector.unsqueeze(0))
+            else
