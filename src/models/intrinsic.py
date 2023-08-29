@@ -262,4 +262,7 @@ class IntrinsicDimensionLight:
                 param = param.to(device_dtype)
 
             # if self.said:
-            #     ray = ray * self.intr
+            #     ray = ray * self.intrinsic_parameter_said[index]
+            # if self.device == "cpu":
+            #     param = (self.initial_value[name] + ray).to(device_dtype)
+     
