@@ -269,4 +269,8 @@ class IntrinsicDimensionLight:
             #     param = (self.initial_value[name] + ray)
             delattr(base, localname)
             setattr(base, localname, param)
-      
+            index += 1
+
+    @staticmethod
+    def apply(
+        module, intrinsic_dimension, output_dir, str_filter=set(), said=False, projection="fastfood", device="
