@@ -273,4 +273,8 @@ class IntrinsicDimensionLight:
 
     @staticmethod
     def apply(
-        module, intrinsic_dimension, output_dir, str_filter=set(), said=False, projection="fastfood", device="
+        module, intrinsic_dimension, output_dir, str_filter=set(), said=False, projection="fastfood", device="cuda"
+    ):
+        # for k, hook in module._forward_pre_hooks.items():
+        #     if isinstance(hook, IntrinsicDimensionLight) and hook.name == name:
+        #   
