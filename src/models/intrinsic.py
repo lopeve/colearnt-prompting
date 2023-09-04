@@ -279,4 +279,7 @@ class IntrinsicDimensionLight:
         #     if isinstance(hook, IntrinsicDimensionLight) and hook.name == name:
         #         raise RuntimeError(
         #             "Cannot register two intrinsic dimension hooks on " "the same parameter {}".format(name)
-        #  
+        #         )
+        fn = IntrinsicDimensionLight(module, intrinsic_dimension, output_dir, str_filter, said, projection, device)
+        module.intrinsic_fn = fn
+       
