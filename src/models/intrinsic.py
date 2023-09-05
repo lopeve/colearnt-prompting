@@ -282,4 +282,9 @@ class IntrinsicDimensionLight:
         #         )
         fn = IntrinsicDimensionLight(module, intrinsic_dimension, output_dir, str_filter, said, projection, device)
         module.intrinsic_fn = fn
-       
+        # module.register_forward_pre_hook(fn)
+        return fn
+
+    # @staticmethod
+    # def apply_with_tensor(module, intrinsic_vector, str_filter=set()):
+   
