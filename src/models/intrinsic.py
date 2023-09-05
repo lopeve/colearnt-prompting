@@ -287,4 +287,7 @@ class IntrinsicDimensionLight:
 
     # @staticmethod
     # def apply_with_tensor(module, intrinsic_vector, str_filter=set()):
-   
+    #     assert isinstance(intrinsic_vector, torch.Tensor) and intrinsic_vector.ndim == 1
+
+    #     for k, hook in module._forward_pre_hooks.items():
+    # 
