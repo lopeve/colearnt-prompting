@@ -290,4 +290,6 @@ class IntrinsicDimensionLight:
     #     assert isinstance(intrinsic_vector, torch.Tensor) and intrinsic_vector.ndim == 1
 
     #     for k, hook in module._forward_pre_hooks.items():
-    # 
+    #         if isinstance(hook, IntrinsicDimensionLight) and hook.name == name:
+    #             raise RuntimeError(
+    #                 "Cannot register two intrinsic dimension 
