@@ -295,4 +295,9 @@ class IntrinsicDimensionLight:
     #                 "Cannot register two intrinsic dimension hooks on " "the same parameter {}".format(name)
     #             )
     #     fn = IntrinsicDimensionLight(module, intrinsic_vector.size(0), str_filter, False)
-    # 
+    #     fn.intrinsic_parameter = intrinsic_vector
+    #     module.register_forward_pre_hook(fn)
+    #     return fn
+
+
+# def intrinsic_dimension(module, intrinsic_d
