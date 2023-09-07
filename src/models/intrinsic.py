@@ -300,4 +300,5 @@ class IntrinsicDimensionLight:
     #     return fn
 
 
-# def intrinsic_dimension(module, intrinsic_d
+# def intrinsic_dimension(module, intrinsic_dimension, output_dir, str_filter, projection):
+#     IntrinsicDimensionLight.apply(module, intrinsic_dimension, output_dir, str_filter, False, proj
