@@ -310,4 +310,9 @@ class IntrinsicDimensionLight:
 #     return module
 
 
-def modify_
+def modify_with_intrinsic_model(model, config):
+    IntrinsicDimensionLight.apply(
+        model,
+        config.intrinsic_dimension,
+        set(),
+        config.intr
