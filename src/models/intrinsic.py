@@ -315,4 +315,12 @@ def modify_with_intrinsic_model(model, config):
         model,
         config.intrinsic_dimension,
         set(),
-        config.intr
+        config.intrinsic_said,
+        config.intrinsic_projection,
+        config.intrinsic_device,
+    )
+    return model
+
+
+def intrinsic_plugin_on_step(pl_module):
+    pl_modul
