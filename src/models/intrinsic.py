@@ -323,4 +323,4 @@ def modify_with_intrinsic_model(model, config):
 
 
 def intrinsic_plugin_on_step(pl_module):
-    pl_modul
+    pl_module.model.intrinsic_fn(pl_module.model)
