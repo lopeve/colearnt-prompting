@@ -274,3 +274,32 @@ def modify_with_prefix_tuning(transformer, config):
         loss_metrics = nn.MSELoss(reduction="sum")
         for step in tqdm(range(config.num_steps)):
             optimizer.zero_grad()
+            list_loss = []
+            for attention_spec in attention_groups:
+                for t5_block in attention_spec["stack"].block:
+                    attention_layer = getattr(t5_block.layer[attention_spec["index"]], attention_spec["module_name"])
+                    prediction = attention_layer.get_prefix(1)
+                    target = attention_layer.stored_key_value_states
+                    list_loss.append(loss_metrics(prediction[0], target[0]) / (target[0] ** 2).sum())
+                    list_loss.append(loss_metrics(prediction[1], target[1]) / (target[1] ** 2).sum())
+            loss = sum(list_loss)
+            if step % 50 == 0:
+                print(step, loss.item(), [v.item() for v in list_loss])
+            loss.backward()
+            optimizer.step()
+
+        trainable_states = {
+            param_name: param_weight.cpu()
+            for param_name, param_weight in transformer.state_dict().items()
+            if param_name in trainable_param_names
+        }
+        if config.prefix_tuning_init_path is not None:
+            trainable_states["config"] = {
+                "prefix_tuning_num_input_tokens": config.prefix_tuning_num_input_tokens,
+                "prefix_tuning_num_target_tokens": config.prefix_tuning_num_target_tokens,
+                "prefix_tuning_parameterization": config.prefix_tuning_parameterization,
+            }
+            torch.save(trainable_states, config.prefix_tuning_init_path)
+        transformer.cpu()
+
+    return transformer
