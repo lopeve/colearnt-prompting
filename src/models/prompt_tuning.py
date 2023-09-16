@@ -8,4 +8,9 @@ def sample_embed(embed, sample_size, start_idx, end_idx):
     return embed_weight[rand_idx].detach()
 
 
-def get_embed_pad(embed, sample_size, start_idx, end_idx)
+def get_embed_pad(embed, sample_size, start_idx, end_idx):
+    embed_weight = embed.weight
+    pad_idx = torch.zeros((sample_size,)).long() # pad token is idx 0
+    return embed_weight[pad_idx].detach()
+
+cl
