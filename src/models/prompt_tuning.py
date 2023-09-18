@@ -16,4 +16,8 @@ def get_embed_pad(embed, sample_size, start_idx, end_idx):
 class T5EncoderPromptTuningWrapper(nn.Module):
     def __init__(self, encoder, config):
         super().__init__()
-        self.num_prefix_emb = config.prom
+        self.num_prefix_emb = config.prompt_tuning_num_prefix_emb
+        self.prompt_tuning_encoder = config.prompt_tuning_encoder
+        self.encoder = encoder
+
+        embed_sample_fn = get_
