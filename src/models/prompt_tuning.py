@@ -24,4 +24,8 @@ class T5EncoderPromptTuningWrapper(nn.Module):
 
         self.prompt_embedding = nn.Parameter(
             embed_sample_fn(
-              
+                embed=encoder.get_input_embeddings(),
+                sample_size=self.num_prefix_emb,
+                start_idx=3,
+                end_idx=5003,
+  
