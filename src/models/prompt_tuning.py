@@ -20,4 +20,8 @@ class T5EncoderPromptTuningWrapper(nn.Module):
         self.prompt_tuning_encoder = config.prompt_tuning_encoder
         self.encoder = encoder
 
-        embed_sample_fn = get_
+        embed_sample_fn = get_embed_pad if config.prompt_tuning_init_with_pad else sample_embed
+
+        self.prompt_embedding = nn.Parameter(
+            embed_sample_fn(
+              
