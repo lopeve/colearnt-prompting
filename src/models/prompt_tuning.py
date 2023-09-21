@@ -31,4 +31,7 @@ class T5EncoderPromptTuningWrapper(nn.Module):
             )
         )  # [num_prefix_emb, emb_dim] sampled from 5000 most common regular token embeddings
 
-    def forward(self, input_ids, attention_mask, inputs_em
+    def forward(self, input_ids, attention_mask, inputs_embeds=None, **kwargs):
+        bs = input_ids.size(0)
+        inputs_embeds = self.encoder.embed_tokens(input_ids)  # [bs, max_seq_len, d_emb]
+   
