@@ -28,4 +28,7 @@ class T5EncoderPromptTuningWrapper(nn.Module):
                 sample_size=self.num_prefix_emb,
                 start_idx=3,
                 end_idx=5003,
-  
+            )
+        )  # [num_prefix_emb, emb_dim] sampled from 5000 most common regular token embeddings
+
+    def forward(self, input_ids, attention_mask, inputs_em
