@@ -36,4 +36,6 @@ class T5EncoderPromptTuningWrapper(nn.Module):
         inputs_embeds = self.encoder.embed_tokens(input_ids)  # [bs, max_seq_len, d_emb]
         prompt_attention_mask = attention_mask.new_ones((bs, self.num_prefix_emb))  # [bs, prompt_len]
         if self.prompt_tuning_encoder:
-            inputs
+            inputs_embeds = torch.cat(
+                [self.prompt_embedding[None, :, :].repeat((bs, 1, 1)), inputs_embeds], dim=1
+            )  # [bs, prompt_len
