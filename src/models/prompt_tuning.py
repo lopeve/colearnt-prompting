@@ -44,4 +44,10 @@ class T5EncoderPromptTuningWrapper(nn.Module):
         encoder_outputs = self.encoder(
             input_ids=None, inputs_embeds=inputs_embeds, attention_mask=attention_mask, **kwargs
         )
-        return en
+        return encoder_outputs
+
+
+class T5DecoderPromptTuningWrapper(nn.Module):
+    def __init__(self, decoder, config):
+        super().__init__()
+        self.num_prefix_e
