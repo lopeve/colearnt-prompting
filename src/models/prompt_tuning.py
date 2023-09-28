@@ -50,4 +50,6 @@ class T5EncoderPromptTuningWrapper(nn.Module):
 class T5DecoderPromptTuningWrapper(nn.Module):
     def __init__(self, decoder, config):
         super().__init__()
-        self.num_prefix_e
+        self.num_prefix_emb = config.prompt_tuning_num_prefix_emb
+        self.prompt_tuning_encoder = config.prompt_tuning_encoder
+        self.prompt_tuning_decoder = config.prompt_tunin
