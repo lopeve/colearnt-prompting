@@ -52,4 +52,9 @@ class T5DecoderPromptTuningWrapper(nn.Module):
         super().__init__()
         self.num_prefix_emb = config.prompt_tuning_num_prefix_emb
         self.prompt_tuning_encoder = config.prompt_tuning_encoder
-        self.prompt_tuning_decoder = config.prompt_tunin
+        self.prompt_tuning_decoder = config.prompt_tuning_decoder
+        self.decoder = decoder
+
+        embed_sample_fn = get_embed_pad if config.prompt_tuning_init_with_pad else sample_embed
+
+        s
