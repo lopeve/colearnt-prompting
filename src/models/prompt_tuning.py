@@ -57,4 +57,7 @@ class T5DecoderPromptTuningWrapper(nn.Module):
 
         embed_sample_fn = get_embed_pad if config.prompt_tuning_init_with_pad else sample_embed
 
-        s
+        self.prompt_embedding = nn.Parameter(
+            embed_sample_fn(
+                embed=decoder.get_input_embeddings(),
+                sample_size=self
