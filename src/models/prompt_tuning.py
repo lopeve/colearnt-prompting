@@ -67,4 +67,6 @@ class T5DecoderPromptTuningWrapper(nn.Module):
         )  # [num_prefix_emb, emb_dim] sampled from 5000 most common regular token embeddings
 
     def forward(self, input_ids, attention_mask, encoder_attention_mask, inputs_embeds=None, **kwargs):
-        bs = input_ids.siz
+        bs = input_ids.size(0)
+        inputs_embeds = self.decoder.embed_tokens(input_ids)  # [bs, max_seq_len, d_emb]
+        prompt_attention_mask = attention_mask.new
