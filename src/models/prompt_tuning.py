@@ -69,4 +69,7 @@ class T5DecoderPromptTuningWrapper(nn.Module):
     def forward(self, input_ids, attention_mask, encoder_attention_mask, inputs_embeds=None, **kwargs):
         bs = input_ids.size(0)
         inputs_embeds = self.decoder.embed_tokens(input_ids)  # [bs, max_seq_len, d_emb]
-        prompt_attention_mask = attention_mask.new
+        prompt_attention_mask = attention_mask.new_ones((bs, self.num_prefix_emb))  # [bs, prompt_len]
+        if self.prompt_tuning_encoder:
+            encoder_attention_mask = torch.cat(
+                [pro
