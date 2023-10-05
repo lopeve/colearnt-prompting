@@ -75,4 +75,6 @@ class T5DecoderPromptTuningWrapper(nn.Module):
                 [prompt_attention_mask, encoder_attention_mask], dim=1
             )  # [bs, prompt_len+max_seq_len]
         if self.prompt_tuning_decoder:
-            inputs_e
+            inputs_embeds = torch.cat(
+                [self.prompt_embedding[None, :, :].repeat((bs, 1, 1)), inputs_embeds], dim=1
+            )  # [bs, prompt_len+max_
