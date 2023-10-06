@@ -84,4 +84,8 @@ class T5DecoderPromptTuningWrapper(nn.Module):
             input_ids=None,
             attention_mask=attention_mask,
             encoder_attention_mask=encoder_attention_mask,
-            inputs_embeds=inp
+            inputs_embeds=inputs_embeds,
+            **kwargs
+        )
+        if self.prompt_tuning_decoder:
+            decoder_outputs.last_hidden_stat
