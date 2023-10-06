@@ -80,4 +80,8 @@ class T5DecoderPromptTuningWrapper(nn.Module):
             )  # [bs, prompt_len+max_seq_len, d_emb]
             attention_mask = torch.cat([prompt_attention_mask, attention_mask], dim=1)  # [bs, prompt_len+max_seq_len]
 
-        decoder_outputs = self.decode
+        decoder_outputs = self.decoder(
+            input_ids=None,
+            attention_mask=attention_mask,
+            encoder_attention_mask=encoder_attention_mask,
+            inputs_embeds=inp
