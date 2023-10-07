@@ -88,4 +88,10 @@ class T5DecoderPromptTuningWrapper(nn.Module):
             **kwargs
         )
         if self.prompt_tuning_decoder:
-            decoder_outputs.last_hidden_stat
+            decoder_outputs.last_hidden_state = decoder_outputs.last_hidden_state[
+                :, self.num_prefix_emb :
+            ]  # [bs, max_seq_len, d_emb]
+        return decoder_outputs
+
+
+de
