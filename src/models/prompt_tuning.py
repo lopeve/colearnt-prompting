@@ -96,4 +96,5 @@ class T5DecoderPromptTuningWrapper(nn.Module):
 
 def modify_with_prompt_tuning(transformer, config):
     transformer.encoder = T5EncoderPromptTuningWrapper(transformer.encoder, config)
-    transformer.decoder = T5Decoder
+    transformer.decoder = T5DecoderPromptTuningWrapper(transformer.decoder, config)
+    return transformer
