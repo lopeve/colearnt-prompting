@@ -203,3 +203,163 @@ def extract_psl_and_features(example, prompttokenizer=None, promptmodel=None, li
 
         target_ids = prompttokenizer(
             target_str, return_tensors="pt", truncation=True, add_special_tokens=add_special_tokens
+        ).input_ids.squeeze(0)
+        answer_choices_ids = [
+            prompttokenizer(
+                answer_choice, return_tensors="pt", truncation=True, add_special_tokens=add_special_tokens
+            ).input_ids.squeeze(0)
+            for answer_choice in answer_choices
+        ]
+
+        target_ids = target_ids.unsqueeze(0)
+        input_ids = input_ids.unsqueeze(0)
+        answer_choices_ids = [answer_choices_ids]
+
+        flat_answer_choice_ids = [choice for list_choices in answer_choices_ids for choice in list_choices]
+        num_choice = [len(list_choices) for list_choices in answer_choices_ids]
+        if max(num_choice) != min(num_choice):
+            raise NotImplementedError("The collate_fn is not implmented for variable number of choices")
+        flat_answer_choices_ids = torch.nn.utils.rnn.pad_sequence(
+            flat_answer_choice_ids, batch_first=True, padding_value=prompttokenizer.pad_token_id
+        )
+        answer_choices_ids = flat_answer_choices_ids.view(len(answer_choices_ids), max(num_choice), -1).contiguous()
+
+        input_ids, choices_ids, labels = input_ids, answer_choices_ids, target_ids
+        bs, num_choices = choices_ids.size()[:2]
+
+        flat_choices_ids = choices_ids.flatten(0, 1)
+        attention_mask = (input_ids != prompttokenizer.pad_token_id).float()  # [bs, max_seq_len]
+
+        input_ids=input_ids.to(device)
+        attention_mask = attention_mask.to(device)
+
+        encoder_hidden_states = promptmodel.encoder(input_ids=input_ids, attention_mask=attention_mask)[0]
+        encoder_features = encoder_hidden_states[0].mean(dim=0)
+
+        encoder_hidden_states = encoder_hidden_states.unsqueeze(dim=1).repeat(1, num_choices, 1, 1).flatten(0, 1)
+
+        attention_mask = attention_mask.unsqueeze(dim=1).repeat(1, num_choices, 1).flatten(0, 1)
+        decoder_input_ids = torch.cat([torch.zeros_like(flat_choices_ids[:, :1]), flat_choices_ids[:, :-1]], dim=1)
+        decoder_attention_mask = (decoder_input_ids == decoder_input_ids).float()
+        lm_target = flat_choices_ids - 100 * (flat_choices_ids == prompttokenizer.pad_token_id).long()
+
+        model_output = promptmodel(
+            attention_mask=attention_mask,
+            encoder_outputs=[encoder_hidden_states],
+            decoder_input_ids=decoder_input_ids.to(device),
+            decoder_attention_mask=decoder_attention_mask.to(device),
+            output_hidden_states=True
+        )
+
+        choices_scores = (
+            F.cross_entropy(model_output.logits.flatten(0, 1), lm_target.flatten(0, 1).to(device), reduction="none")
+            .view(bs, num_choices, -1)
+            .sum(dim=-1)
+        )
+
+        choice = choices_scores[0].argmin()
+        example['pseudolabel'] = choice.cpu().numpy().item()
+
+        decoder_features = model_output.decoder_hidden_states[-1][0,0]
+        features = decoder_features # this is what we use in the icml paper
+
+        example['features'] = features.cpu().numpy().tolist()
+        return example
+
+
+def get_dsdict_prompt(config, dataset_reader, prompttokenizer, promptmodel):
+    train = dataset_reader.read_orig_dataset('train')
+
+    # for super_glue, use public validation like a test set, for our purposes.
+    test_key = 'validation' if config.validation_is_test else 'test'
+    test = dataset_reader.read_orig_dataset(test_key)
+
+    templates = dataset_reader.get_template(-1)
+    list_templates = templates
+
+    ds_dict = dataset_reader.get_full_orig_dataset()
+
+    if config.train_template_idx == -1:
+        template_idx = np.random.choice(len(list_templates))
+    else:
+        template_idx = config.train_template_idx
+
+    train = train.map(extract_psl_and_features, batched=False,
+                      fn_kwargs={'prompttokenizer': prompttokenizer,
+                                 'promptmodel': promptmodel,
+                                 'list_templates': list_templates,
+                                 'template_idx': template_idx})
+
+    test = test.map(extract_psl_and_features, batched=False,
+                    fn_kwargs={'prompttokenizer': prompttokenizer,
+                               'promptmodel': promptmodel,
+                               'list_templates': list_templates,
+                               'template_idx': template_idx})
+
+
+    lab = np.array(test['label'])
+    psl = np.array(test['pseudolabel'])
+    acc = (lab == psl).astype(float).mean()
+    print(f"T0 TRUE test accuracy: {acc}")
+
+    accumulated = {"prediction": psl, "label": lab}
+    metrics = dataset_reader.compute_metric(accumulated)
+    for key, value in accumulated.items():
+        if key.startswith("log."):
+            metrics[key.replace("log.", "")] = mean(value)
+
+    result_str = json.dumps(metrics) + "\n"
+    t0_path = f"{config.dev_score_file}.t0"
+    with open(t0_path, "a+") as f:
+        f.write(result_str)
+    print("\n" + result_str)
+
+    train_subset, val_subset, test = make_subset(config, train, test)
+    ds_dict['train'] = train_subset
+    ds_dict['validation'] = val_subset
+    ds_dict['test'] = test
+    return ds_dict
+
+
+
+
+def extract_psl_and_features_bert(example, bert):
+    bert.eval()
+    with torch.no_grad():
+        example.pop('labels', None)
+        outputs = bert(**{k: v.to('cuda').unsqueeze(0) for (k,v) in example.items()},
+                        output_hidden_states=True)
+        hs = outputs.hidden_states[-1]
+        avg_rep = hs[:,0,:].cpu().numpy().tolist()[0] # cls token
+        psl = outputs.logits.argmax(dim=1).item()
+        example = {'features': avg_rep, 'pseudolabel': psl}
+        return example
+
+def get_dsdict_bert(config, dataset_reader, bertmodule):
+    ds_dict = dataset_reader.get_full_orig_dataset()
+
+    datamodule = BERTDataModule(
+        bertmodule.model_name_or_path,
+        bertmodule.task_name,
+        ds_dict
+    )
+    datamodule.setup('fit') # run tokenization
+    train = datamodule.dataset['train']
+
+    # for super_glue, use public validation like a test set, for our purposes.
+    test_key = 'validation' if config.validation_is_test else 'test'
+    test = datamodule.dataset[test_key]
+
+    model = bertmodule.model.to('cuda')
+    train = train.map(extract_psl_and_features_bert, batched=False,
+                      fn_kwargs={'bert': model})
+    test = test.map(extract_psl_and_features_bert, batched=False,
+                      fn_kwargs={'bert': model})
+
+    train = train.rename_column("labels", "label")
+    test = test.rename_column("labels", "label")
+
+    lab = np.array(test['label'])
+    psl = np.array(test['pseudolabel'])
+    acc = (lab == psl).astype(float).mean()
+    print(f"BERT TRUE test accuracy: {acc}")
