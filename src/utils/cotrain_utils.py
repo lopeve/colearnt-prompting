@@ -363,3 +363,168 @@ def get_dsdict_bert(config, dataset_reader, bertmodule):
     psl = np.array(test['pseudolabel'])
     acc = (lab == psl).astype(float).mean()
     print(f"BERT TRUE test accuracy: {acc}")
+
+
+    accumulated = {"prediction": psl, "label": lab}
+    metrics = dataset_reader.compute_metric(accumulated)
+    for key, value in accumulated.items():
+        if key.startswith("log."):
+            metrics[key.replace("log.", "")] = mean(value)
+
+    result_str = json.dumps(metrics) + "\n"
+    bert_path = f"{config.dev_score_file}.bert"
+    with open(bert_path, "a+") as f:
+        f.write(result_str)
+    print("\n" + result_str)
+
+    # need to zip train and test back up with the originals
+    # since datamodule setup() adds stuff we don't want later (BERT input ids, etc).
+    # we only need the text fields when we train T0.
+
+    # add the new columns from the mapped versions to the
+    # original sets.
+
+    train_subset, val_subset, test = make_subset(config, train, test)
+
+    # calling from_dict(ds.to_dict()) seems required to re-wrap everything correctly.
+    ds_dict['train'] = datasets.Dataset.from_dict(train_subset.to_dict())
+    ds_dict['validation'] = datasets.Dataset.from_dict(val_subset.to_dict())
+    ds_dict['test'] = datasets.Dataset.from_dict(test.to_dict())
+    return ds_dict
+
+
+def extract_psl_and_features_labelmodel(example, model):
+    model.eval()
+    with torch.no_grad():
+        inputs = torch.tensor(example['feat'])[None,...]
+        inputs = inputs.to(model.device)
+        pred = model(inputs)
+        psl = pred.argmax(dim=1).item()
+        feat = example['feat']
+        example = {'features': inputs.view(-1).cpu().tolist(), 'pseudolabel': psl, 'scores': pred.view(-1)}
+        return example
+
+
+def get_dsdict_labelmodel(config, dataset_reader, model, bert_name=None, bert_model=None):
+    ds_dict = dataset_reader.get_full_orig_dataset()
+
+    datamodule = LabelModelDataModule(
+        config,
+        ds_dict
+    )
+    datamodule.setup('fit') # convert to torch tensors
+
+    # for these datasets, i've already renamed (the superglue) "validation" to "test"
+    train = datamodule.dataset['train']
+    test_key = 'validation' if config.validation_is_test else 'test'
+    test = datamodule.dataset[test_key]
+
+    model = model.to('cuda')
+    train = train.map(extract_psl_and_features_labelmodel, batched=False,
+                      fn_kwargs={'model': model})
+    test = test.map(extract_psl_and_features_labelmodel, batched=False,
+                    fn_kwargs={'model': model})
+
+    # sets 'features' column to the bert features to use in the
+    # data selection.
+    if bert_name is not None:
+        bert_dm = BERTDataModule(
+            bert_name,
+            config.dataset,
+            dataset_reader.get_full_orig_dataset()
+        )
+        bert_dm.setup('fit')
+        if bert_model is None:
+            bert = BERT(
+                model_name_or_path=bert_name,
+                num_labels=bert_dm.num_labels,
+                task_name=bert_dm.task_name,
+                dataset_reader=dataset_reader,
+                warmup_steps=500,
+                weight_decay=config.bert_wd,
+                learning_rate=config.bert_lr
+            )
+        else:
+            bert = bert_model
+
+        bert = bert.model.to('cuda')
+        trainbert = bert_dm.dataset['train'].map(extract_psl_and_features_bert, batched=False,
+                                                 fn_kwargs={'bert': bert})
+        testbert = bert_dm.dataset[test_key].map(extract_psl_and_features_bert, batched=False,
+                                                 fn_kwargs={'bert': bert})
+
+        train = train.remove_columns(["features"])
+        test = test.remove_columns(["features"])
+        train = train.add_column("features", trainbert['features'].tolist())
+        test = test.add_column("features", testbert['features'].tolist())
+
+    print(train)
+    lab = np.array(test['label'])
+    psl = np.array(test['pseudolabel'])
+    acc = (lab == psl).astype(float).mean()
+    print(f"LABELMODEL TRUE test accuracy: {acc}")
+
+    accumulated = {"prediction": psl, "label": lab}
+    metrics = dataset_reader.compute_metric(accumulated)
+    for key, value in accumulated.items():
+        if key.startswith("log."):
+            metrics[key.replace("log.", "")] = mean(value)
+
+    result_str = json.dumps(metrics) + "\n"
+    lm_path = f"{config.dev_score_file}.lm"
+    with open(lm_path, "a+") as f:
+        f.write(result_str)
+    print("\n" + result_str)
+
+    train_subset, val_subset, test = make_subset(config, train, test)
+
+    # calling from_dict(ds.to_dict()) seems required to re-wrap everything correctly.
+    ds_dict['train'] = datasets.Dataset.from_dict(train_subset.to_dict())
+    ds_dict['validation'] = datasets.Dataset.from_dict(val_subset.to_dict())
+    ds_dict['test'] = datasets.Dataset.from_dict(test.to_dict())
+    return ds_dict
+
+
+
+def make_subset(config, train, test):
+    # make confident subsets.
+    # we're going to pick 80/20 split of the confident data for training + (pseudo)val,
+    # so use a slightly larger beta here.
+
+    train_inds = list(range(len(train)))
+    train_inds, val_inds = train_test_split(train_inds, test_size=0.2)
+    train_subset = train.select(train_inds)
+    val_subset = train.select(val_inds)
+
+    #actual_beta = config.cotrain_beta / 0.8
+    #conf_inds_train, conf_inds_val = train_test_split(conf_inds, test_size=0.2)
+
+    if config.cotrain_min_pct_per_class > 0:
+        conf_inds_train = get_conf_inds_minppc(
+            torch.LongTensor(train_subset['pseudolabel']),
+            train_subset['features'],
+            config.cotrain_beta,
+            config.cotrain_min_pct_per_class
+        )
+        conf_inds_val = get_conf_inds_minppc(
+            torch.LongTensor(val_subset['pseudolabel']),
+            val_subset['features'],
+            config.cotrain_beta,
+            config.cotrain_min_pct_per_class
+        )
+
+    else:
+        conf_inds_train = get_conf_inds(torch.LongTensor(train_subset['pseudolabel']),
+                                        train_subset['features'], config.cotrain_beta)
+
+        conf_inds_val = get_conf_inds(torch.LongTensor(val_subset['pseudolabel']),
+                                      val_subset['features'], config.cotrain_beta)
+
+    train_subset = train_subset.select(conf_inds_train)
+    val_subset = val_subset.select(conf_inds_val)
+
+
+    lab = np.array(train_subset['label'])
+    psl = np.array(train_subset['pseudolabel'])
+    print("pseudolabel metrics on confident set:")
+    print({"accuracy": accuracy_score(lab, psl), "balanced_accuracy": balanced_accuracy_score(lab, psl)})
