@@ -528,3 +528,24 @@ def make_subset(config, train, test):
     psl = np.array(train_subset['pseudolabel'])
     print("pseudolabel metrics on confident set:")
     print({"accuracy": accuracy_score(lab, psl), "balanced_accuracy": balanced_accuracy_score(lab, psl)})
+    print(torch.bincount(torch.LongTensor(psl)))
+
+    lab = np.array(val_subset['label'])
+    psl = np.array(val_subset['pseudolabel'])
+    print("pseudolabel metrics on confident set, val:")
+    print({"accuracy": accuracy_score(lab, psl), "balanced_accuracy": balanced_accuracy_score(lab, psl)})
+
+    lab = np.array(train['label'])
+    psl = np.array(train['pseudolabel'])
+    print("pseudolabel metrics on full set:")
+    print({"accuracy": accuracy_score(lab, psl), "balanced_accuracy": balanced_accuracy_score(lab, psl)})
+
+    # REPLACE LABELS WITH PSEUDOLABELS
+    train_subset = train_subset.remove_columns(["label", "features"])
+    train_subset = train_subset.rename_column("pseudolabel", "label")
+    val_subset = val_subset.remove_columns(["label", "features"])
+    val_subset = val_subset.rename_column("pseudolabel", "label")
+    test = test.remove_columns(["label", "features"])
+    test = test.rename_column("pseudolabel", "label")
+
+    return train_subset, val_subset, test
