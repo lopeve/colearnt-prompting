@@ -12,4 +12,9 @@ def get_optimizer(model, config):
     :param config:
     :return:
     """
-    optim_name 
+    optim_name = config.optimizer
+
+    def param_name_to_group_name(param_name):
+        if False:
+            return ".".join(param_name.split(".")[:3])
+            # only needed when the model has 
