@@ -22,4 +22,7 @@ def get_optimizer(model, config):
             return "."
 
     param_groups = defaultdict(lambda: {"params": []})
-    traina
+    trainable_param_names = set()
+    for (param_name, param) in model.named_parameters():
+        if re.fullmatch(config.trainable_param_names, param_name):
+            param_gr
