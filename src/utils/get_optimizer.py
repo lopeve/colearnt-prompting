@@ -28,4 +28,8 @@ def get_optimizer(model, config):
             param_groups[param_name_to_group_name(param_name)]["params"].append(param)
             trainable_param_names.add(param_name)
         else:
-            param.requires
+            param.requires_grad = False
+
+    param_groups = param_groups.values()
+    if optim_name.lower() == "adam":
+        optimizer = optim.Adam(param_groups, lr=config.lr)
