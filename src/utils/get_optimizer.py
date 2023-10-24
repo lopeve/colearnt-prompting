@@ -25,4 +25,7 @@ def get_optimizer(model, config):
     trainable_param_names = set()
     for (param_name, param) in model.named_parameters():
         if re.fullmatch(config.trainable_param_names, param_name):
-            param_gr
+            param_groups[param_name_to_group_name(param_name)]["params"].append(param)
+            trainable_param_names.add(param_name)
+        else:
+            param.requires
