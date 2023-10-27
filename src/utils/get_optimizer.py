@@ -35,4 +35,7 @@ def get_optimizer(model, config):
         optimizer = optim.Adam(param_groups, lr=config.lr)
     elif optim_name.lower() == "sgd":
         optimizer = optim.SGD(param_groups, lr=config.lr, weight_decay=config.weight_decay)
-    elif optim_name.lower()
+    elif optim_name.lower() == "adamw":
+        optimizer = optim.AdamW(param_groups, lr=config.lr, weight_decay=config.weight_decay, eps=1e-8)
+    elif optim_name.lower() == "adafactor":
+        optimizer = Adafactor(
