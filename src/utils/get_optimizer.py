@@ -33,3 +33,6 @@ def get_optimizer(model, config):
     param_groups = param_groups.values()
     if optim_name.lower() == "adam":
         optimizer = optim.Adam(param_groups, lr=config.lr)
+    elif optim_name.lower() == "sgd":
+        optimizer = optim.SGD(param_groups, lr=config.lr, weight_decay=config.weight_decay)
+    elif optim_name.lower()
