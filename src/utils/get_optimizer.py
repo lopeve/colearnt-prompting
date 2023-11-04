@@ -39,3 +39,8 @@ def get_optimizer(model, config):
         optimizer = optim.AdamW(param_groups, lr=config.lr, weight_decay=config.weight_decay, eps=1e-8)
     elif optim_name.lower() == "adafactor":
         optimizer = Adafactor(
+            param_groups,
+            lr=config.lr,
+            weight_decay=config.weight_decay,
+            scale_parameter=config.scale_parameter,
+         
