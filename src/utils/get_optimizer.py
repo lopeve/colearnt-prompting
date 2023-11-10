@@ -43,4 +43,10 @@ def get_optimizer(model, config):
             lr=config.lr,
             weight_decay=config.weight_decay,
             scale_parameter=config.scale_parameter,
-         
+            relative_step=False,
+            warmup_init=False,
+        )
+    else:
+        raise ValueError("Invalid Optimizer name %s" % optim_name)
+
+ 
