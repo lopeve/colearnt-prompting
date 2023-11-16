@@ -49,4 +49,4 @@ def get_optimizer(model, config):
     else:
         raise ValueError("Invalid Optimizer name %s" % optim_name)
 
- 
+    return optimizer, trainable_param_names
