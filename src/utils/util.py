@@ -151,3 +151,5 @@ def get_avg_dict_val_store(dict_val_store, num_batches, grad_accumulation_factor
 
     for k in dict_val_store.keys():
         dict_avg_val[k] = float('%.3f' % (dict_val_store[k] / num_batches / grad_accumulation_factor))
+
+    return dict_avg_val
