@@ -4,4 +4,6 @@ This repository contains the implementation for our ICML 2022 paper [Co-training
 
 The code is instrumental for:
   - Enhancing the zero-shot and few-shot performance of large language models
-  - Distilling large mode
+  - Distilling large models like GPT-3 and T0 into compact task-specific models.
+
+We sucesfully built many parts of this repository on top of the outs
