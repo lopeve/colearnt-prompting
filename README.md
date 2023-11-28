@@ -6,4 +6,9 @@ The code is instrumental for:
   - Enhancing the zero-shot and few-shot performance of large language models
   - Distilling large models like GPT-3 and T0 into compact task-specific models.
 
-We sucesfully built many parts of this repository on top of the outs
+We sucesfully built many parts of this repository on top of the outstanding [T-Few](https://github.com/r-three/t-few) repository.
+
+If you find this code useful, please consider citing our paper:
+
+```
+@inproceedin
