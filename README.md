@@ -11,4 +11,6 @@ We sucesfully built many parts of this repository on top of the outstanding [T-F
 If you find this code useful, please consider citing our paper:
 
 ```
-@inproceedin
+@inproceedings{lang2022co,
+  title={Co-training improves prompt-based learning for large language models},
+  author={Lang, Hunter and Agrawal, Monica N and Kim, Yoon and S
