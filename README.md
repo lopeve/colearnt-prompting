@@ -13,4 +13,12 @@ If you find this code useful, please consider citing our paper:
 ```
 @inproceedings{lang2022co,
   title={Co-training improves prompt-based learning for large language models},
-  author={Lang, Hunter and Agrawal, Monica N and Kim, Yoon and S
+  author={Lang, Hunter and Agrawal, Monica N and Kim, Yoon and Sontag, David},
+  booktitle={International Conference on Machine Learning},
+  pages={11985--12003},
+  year={2022},
+  organization={PMLR}
+}
+```
+
+Setup, 
