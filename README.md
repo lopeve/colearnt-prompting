@@ -21,4 +21,6 @@ If you find this code useful, please consider citing our paper:
 }
 ```
 
-Setup, 
+Setup, usage, model training, result reproduction, and method of application to your data set are outlined in detail in the original README content.
+
+__N
