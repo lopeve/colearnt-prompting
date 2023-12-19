@@ -23,4 +23,6 @@ If you find this code useful, please consider citing our paper:
 
 Setup, usage, model training, result reproduction, and method of application to your data set are outlined in detail in the original README content.
 
-__N
+__Note__:
+
+This is the new home for the project, under the new owner lopeve, for any references or author contacts please see the original paper and repository maintained by clinicalml.
